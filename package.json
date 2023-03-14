@@ -1,9 +1,9 @@
 {
-  "name": "react-mobx-cookie-consent",
+  "name": "@code-202/cookie-consent",
   "version": "1.2.0",
   "description": "Rich cookie consent with react/mobx and bootstrap design",
   "main": "build/index.js",
-  "repository": "git@github.com:code-202/react-mobx-cookie-consent.git",
+  "repository": "git@github.com:code-202/js-cookie-consent.git",
   "author": "jngermon <jn.germon@code202.fr>",
   "license": "MIT",
   "private": false,
