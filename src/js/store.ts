@@ -4,7 +4,7 @@ import { merge } from 'lodash'
 import { ServiceDefinition, ServiceOptions, Service } from './service'
 
 export interface PartialStoreOptions {
-    cookies?: string
+    isCustomizationEnabled?: boolean
     cookie?: {
         name?: string
         path?: string
@@ -15,6 +15,7 @@ export interface PartialStoreOptions {
 }
 
 export interface StoreOptions {
+    customizable: boolean
     cookie: {
         name: string
         path: string
@@ -34,7 +35,7 @@ export class Store {
     protected _cookies: Cookies
     protected initConsents: string[] = []
 
-    constructor(options: PartialStoreOptions) {
+    constructor(options: PartialStoreOptions, cookies?: string) {
         makeObservable(this, {
             services: observable,
             isDeclineAll: observable,
@@ -66,7 +67,7 @@ export class Store {
             options
         )
 
-        this._cookies = new Cookies(options.cookies)
+        this._cookies = new Cookies(cookies)
     }
 
     public initialization (): void {
@@ -99,6 +100,10 @@ export class Store {
         this.services.push(service)
 
         return true
+    }
+
+    public get isCustomizable(): boolean {
+        return this._options.customizable
     }
 
     public accept(id: string): void {

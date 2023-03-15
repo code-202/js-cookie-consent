@@ -9,6 +9,19 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@code-202/kernel@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@code-202/kernel/-/kernel-2.0.0.tgz#b06d438b2a3a8b06f242aa0e5ea2efb0f5ea7dd0"
+  integrity sha512-zx9AdXp0BYHBV6QP+6k5KnSVnSO6OGZKF+wPFfq0kS8z//x6tV/SZ446KP9qp2V/R/KYhZ1UGRvCj9sFeyfMMA==
+  dependencies:
+    "@code-202/serializer" "^1.0.0"
+    lodash.has "^4.5.2"
+
+"@code-202/serializer@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@code-202/serializer/-/serializer-1.0.0.tgz#782f06ead1225bf2243f72acafd6772bd543eb72"
+  integrity sha512-Wi3qN4oSg3dOuW18GWuMcxeo+OZBXS0h7GZqiivkZZD5+5T1JPBWq+dIqo+pDBIcz+HYIx7lniKCGXktgl+/Tg==
+
 "@eslint/eslintrc@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-2.0.0.tgz#943309d8697c52fc82c076e90c1c74fbbe69dbff"
@@ -1242,6 +1255,11 @@ lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
+
+lodash.has@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/lodash.has/-/lodash.has-4.5.2.tgz#d19f4dc1095058cccbe2b0cdf4ee0fe4aa37c862"
+  integrity sha512-rnYUdIo6xRCJnQmbVFEwcxF144erlD+M3YcJUVesflU9paQaE8p+fJDcIQrlMYbxoANFL+AB9hZrzSBBk5PL+g==
 
 lodash.isempty@^4.4.0:
   version "4.4.0"

@@ -2,10 +2,10 @@ import * as React from 'react'
 import { observer } from 'mobx-react'
 import { Store } from './store'
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
+import { getKernel } from '@code-202/kernel'
 
 export interface Props {
-    store: Store
-    enableCustomization?: boolean
+
 }
 
 export interface State {
@@ -13,13 +13,19 @@ export interface State {
 }
 
 export class Dialog extends React.Component<Props, State> {
+    private store: Store
+
+    constructor(props: Props) {
+        super(props)
+
+        this.store = getKernel().container.get('cookie-consent') as Store
+    }
 
     render (): React.ReactNode {
-        const { store } = this.props
 
         return <>
-            <Modal isOpen={store.dialogIsOpened} centered toggle={store.noCookie !== true ? () => store.toggleDialog() : undefined}>
-                <ModalHeader className="cookie-consent-dialog-body" toggle={store.noCookie !== true ? () => store.toggleDialog() : undefined}>
+            <Modal isOpen={this.store.dialogIsOpened} centered toggle={this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined}>
+                <ModalHeader className="cookie-consent-dialog-body" toggle={this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined}>
                     { this.renderModalHeader() }
                 </ModalHeader>
                 <ModalBody className="cookie-consent-dialog-body">
@@ -32,7 +38,7 @@ export class Dialog extends React.Component<Props, State> {
                     <button onClick={this.onDeclineClickHandler} className="cookie-consent-dialog-btn-decline">
                         { this.renderButtonDeclineAll() }
                     </button>
-                    { this.props.enableCustomization && (
+                    { this.store.isCustomizable && (
                         <button onClick={this.onCustomizeClickHandler}  className="cookie-consent-dialog-btn-customize">
                             { this.renderButtonCustomize() }
                         </button>
@@ -63,15 +69,11 @@ export class Dialog extends React.Component<Props, State> {
     }
 
     protected onDeclineClickHandler = (): void => {
-        const { store } = this.props
-
-        store.declineAll()
+        this.store.declineAll()
     }
 
     protected onAcceptClickHandler = (): void => {
-        const { store } = this.props
-
-        store.acceptAll()
+        this.store.acceptAll()
     }
 
     protected onCustomizeClickHandler = (): void => {

@@ -17,7 +17,7 @@ class Store {
     _options;
     _cookies;
     initConsents = [];
-    constructor(options) {
+    constructor(options, cookies) {
         (0, mobx_1.makeObservable)(this, {
             services: mobx_1.observable,
             isDeclineAll: mobx_1.observable,
@@ -42,7 +42,7 @@ class Store {
                 secure: true
             }
         }, options);
-        this._cookies = new universal_cookie_1.default(options.cookies);
+        this._cookies = new universal_cookie_1.default(cookies);
     }
     initialization() {
         this.initialize(); //For react-mobx-store-container compatibility
@@ -65,6 +65,9 @@ class Store {
         }
         this.services.push(service);
         return true;
+    }
+    get isCustomizable() {
+        return this._options.customizable;
     }
     accept(id) {
         const service = this.findService(id);

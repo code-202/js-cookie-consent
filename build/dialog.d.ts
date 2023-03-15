@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { Store } from './store';
 export interface Props {
-    store: Store;
-    enableCustomization?: boolean;
 }
 export interface State {
 }
 export declare class Dialog extends React.Component<Props, State> {
+    private store;
+    constructor(props: Props);
     render(): React.ReactNode;
     renderModalHeader(): React.ReactNode;
     renderModalBody(): React.ReactNode;

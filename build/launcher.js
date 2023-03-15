@@ -26,14 +26,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Launcher = void 0;
 const React = __importStar(require("react"));
 const mobx_react_1 = require("mobx-react");
+const kernel_1 = require("@code-202/kernel");
 class Launcher extends React.Component {
+    store;
+    constructor(props) {
+        super(props);
+        this.store = (0, kernel_1.getKernel)().container.get('cookie-consent');
+    }
     render() {
-        const { store } = this.props;
-        if (store.noCookie !== false) {
+        if (this.store.noCookie !== false) {
             return null;
         }
         return React.createElement(React.Fragment, null,
-            React.createElement("button", { className: "cookie-consent-btn", onClick: () => store.toggleDialog() }, this.renderContent()));
+            React.createElement("button", { className: "cookie-consent-btn", onClick: () => this.store.toggleDialog() }, this.renderContent()));
     }
     renderContent() {
         return 'Manage cookie consent';

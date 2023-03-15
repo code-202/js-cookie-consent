@@ -1,7 +1,7 @@
 import Cookies from 'universal-cookie';
 import { ServiceOptions, Service } from './service';
 export interface PartialStoreOptions {
-    cookies?: string;
+    isCustomizationEnabled?: boolean;
     cookie?: {
         name?: string;
         path?: string;
@@ -11,6 +11,7 @@ export interface PartialStoreOptions {
     };
 }
 export interface StoreOptions {
+    customizable: boolean;
     cookie: {
         name: string;
         path: string;
@@ -28,11 +29,12 @@ export declare class Store {
     protected _options: StoreOptions;
     protected _cookies: Cookies;
     protected initConsents: string[];
-    constructor(options: PartialStoreOptions);
+    constructor(options: PartialStoreOptions, cookies?: string);
     initialization(): void;
     initialize(): void;
     toggleDialog(): void;
     addService(options: ServiceOptions): boolean;
+    get isCustomizable(): boolean;
     accept(id: string): void;
     decline(id: string): void;
     acceptAll(): void;
