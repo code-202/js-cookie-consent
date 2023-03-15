@@ -57,7 +57,7 @@ export class Store {
         this._options = merge(
             {
                 cookie: {
-                    name: 'rmcc',
+                    name: '_cc',
                     path: '/',
                     maxAge: 365 * 24 * 60 * 60,
                     secure: true

@@ -75,7 +75,7 @@ export class Dialog extends React.Component<Props, State> {
     }
 
     protected onCustomizeClickHandler = (): void => {
-        console.log('comming soon...')
+        console.log('coming soon...')
     }
 }
 

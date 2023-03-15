@@ -36,7 +36,7 @@ class Store {
         });
         this._options = (0, lodash_1.merge)({
             cookie: {
-                name: 'rmcc',
+                name: '_cc',
                 path: '/',
                 maxAge: 365 * 24 * 60 * 60,
                 secure: true

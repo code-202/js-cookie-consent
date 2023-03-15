@@ -63,7 +63,7 @@ class Dialog extends React.Component {
         store.acceptAll();
     };
     onCustomizeClickHandler = () => {
-        console.log('comming soon...');
+        console.log('coming soon...');
     };
 }
 exports.Dialog = Dialog;
