@@ -18,4 +18,9 @@
         @extend .btn;
         @extend .btn-outline-dark;
     }
+
+    .cookie-consent-dialog-btn-customize {
+        @extend .btn;
+        @extend .btn-secondary;
+    }
 }
