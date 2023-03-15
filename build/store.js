@@ -147,7 +147,6 @@ class Store {
             isAcceptAll: this.isAcceptAll,
             noCookie: this.noCookie,
             dialogIsOpened: this.dialogIsOpened,
-            options: this._options,
         };
         return data;
     }
@@ -157,7 +156,6 @@ class Store {
             this.isAcceptAll = data.isAcceptAll;
             this.noCookie = data.noCookie;
             this.dialogIsOpened = data.dialogIsOpened;
-            this._options = data.options;
         })();
     }
 }

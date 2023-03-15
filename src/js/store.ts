@@ -209,7 +209,6 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
             isAcceptAll: this.isAcceptAll,
             noCookie: this.noCookie,
             dialogIsOpened: this.dialogIsOpened,
-            options: this._options,
         };
 
         return data
@@ -221,7 +220,6 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
             this.isAcceptAll = data.isAcceptAll
             this.noCookie = data.noCookie
             this.dialogIsOpened = data.dialogIsOpened
-            this._options = data.options
         })()
     }
 }
@@ -231,5 +229,4 @@ export interface StoreNormalized {
     isAcceptAll: boolean
     noCookie: boolean | undefined
     dialogIsOpened: boolean
-    options: StoreOptions
 }

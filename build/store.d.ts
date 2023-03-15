@@ -52,5 +52,4 @@ export interface StoreNormalized {
     isAcceptAll: boolean;
     noCookie: boolean | undefined;
     dialogIsOpened: boolean;
-    options: StoreOptions;
 }
