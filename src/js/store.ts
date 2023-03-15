@@ -5,7 +5,7 @@ import { ServiceDefinition, ServiceOptions, Service } from './service'
 import { Denormalizable, Normalizable } from '@code-202/serializer'
 
 export interface PartialStoreOptions {
-    isCustomizationEnabled?: boolean
+    customizable?: boolean
     cookie?: {
         name?: string
         path?: string
@@ -58,12 +58,13 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
 
         this._options = merge(
             {
+                customizable: false,
                 cookie: {
                     name: '_cc',
                     path: '/',
                     maxAge: 365 * 24 * 60 * 60,
                     secure: true
-                }
+                },
             } as StoreOptions,
             options
         )

@@ -2,7 +2,7 @@ import Cookies from 'universal-cookie';
 import { ServiceOptions, Service } from './service';
 import { Denormalizable, Normalizable } from '@code-202/serializer';
 export interface PartialStoreOptions {
-    isCustomizationEnabled?: boolean;
+    customizable?: boolean;
     cookie?: {
         name?: string;
         path?: string;

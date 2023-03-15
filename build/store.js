@@ -35,12 +35,13 @@ class Store {
             declineAll: mobx_1.action,
         });
         this._options = (0, lodash_1.merge)({
+            customizable: false,
             cookie: {
                 name: '_cc',
                 path: '/',
                 maxAge: 365 * 24 * 60 * 60,
                 secure: true
-            }
+            },
         }, options);
         this._cookies = new universal_cookie_1.default(cookies);
     }
