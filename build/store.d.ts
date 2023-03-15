@@ -1,5 +1,6 @@
 import Cookies from 'universal-cookie';
 import { ServiceOptions, Service } from './service';
+import { Denormalizable, Normalizable } from '@code-202/serializer';
 export interface PartialStoreOptions {
     isCustomizationEnabled?: boolean;
     cookie?: {
@@ -20,7 +21,7 @@ export interface StoreOptions {
         secure: boolean;
     };
 }
-export declare class Store {
+export declare class Store implements Normalizable<StoreNormalized>, Denormalizable<StoreNormalized> {
     services: Service[];
     isDeclineAll: boolean;
     isAcceptAll: boolean;
@@ -30,7 +31,6 @@ export declare class Store {
     protected _cookies: Cookies;
     protected initConsents: string[];
     constructor(options: PartialStoreOptions, cookies?: string);
-    initialization(): void;
     initialize(): void;
     toggleDialog(): void;
     addService(options: ServiceOptions): boolean;
@@ -44,4 +44,13 @@ export declare class Store {
     get nbNeedConcentServices(): number;
     protected findService(id: string): Service | undefined;
     protected saveConsentsInCookie(): void;
+    normalize(): StoreNormalized;
+    denormalize(data: StoreNormalized): void;
+}
+export interface StoreNormalized {
+    isDeclineAll: boolean;
+    isAcceptAll: boolean;
+    noCookie: boolean | undefined;
+    dialogIsOpened: boolean;
+    options: StoreOptions;
 }

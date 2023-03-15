@@ -44,9 +44,6 @@ class Store {
         }, options);
         this._cookies = new universal_cookie_1.default(cookies);
     }
-    initialization() {
-        this.initialize(); //For react-mobx-store-container compatibility
-    }
     initialize() {
         this.loadTokenFromCookie();
         this.dialogIsOpened = this.noCookie === true && this.nbNeedConcentServices > 0;
@@ -142,6 +139,25 @@ class Store {
         };
         this._cookies.set(this._options.cookie.name, this.consents.join('|'), options);
         this.noCookie = false;
+    }
+    normalize() {
+        const data = {
+            isDeclineAll: this.isDeclineAll,
+            isAcceptAll: this.isAcceptAll,
+            noCookie: this.noCookie,
+            dialogIsOpened: this.dialogIsOpened,
+            options: this._options,
+        };
+        return data;
+    }
+    denormalize(data) {
+        (0, mobx_1.action)(() => {
+            this.isDeclineAll = data.isDeclineAll;
+            this.isAcceptAll = data.isAcceptAll;
+            this.noCookie = data.noCookie;
+            this.dialogIsOpened = data.dialogIsOpened;
+            this._options = data.options;
+        })();
     }
 }
 exports.Store = Store;

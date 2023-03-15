@@ -2,6 +2,7 @@ import { makeObservable, action, observable, computed } from 'mobx'
 import Cookies, { CookieSetOptions } from 'universal-cookie'
 import { merge } from 'lodash'
 import { ServiceDefinition, ServiceOptions, Service } from './service'
+import { Denormalizable, Normalizable } from '@code-202/serializer'
 
 export interface PartialStoreOptions {
     isCustomizationEnabled?: boolean
@@ -25,7 +26,7 @@ export interface StoreOptions {
     }
 }
 
-export class Store {
+export class Store implements Normalizable<StoreNormalized>, Denormalizable<StoreNormalized> {
     public services: Service[] = []
     public isDeclineAll: boolean = false
     public isAcceptAll: boolean = false
@@ -68,10 +69,6 @@ export class Store {
         )
 
         this._cookies = new Cookies(cookies)
-    }
-
-    public initialization (): void {
-        this.initialize() //For react-mobx-store-container compatibility
     }
 
     public initialize (): void {
@@ -204,5 +201,34 @@ export class Store {
 
         this.noCookie = false
     }
+
+    normalize (): StoreNormalized {
+        const data = {
+            isDeclineAll: this.isDeclineAll,
+            isAcceptAll: this.isAcceptAll,
+            noCookie: this.noCookie,
+            dialogIsOpened: this.dialogIsOpened,
+            options: this._options,
+        };
+
+        return data
+    }
+
+    denormalize (data: StoreNormalized) {
+        action(() => {
+            this.isDeclineAll = data.isDeclineAll
+            this.isAcceptAll = data.isAcceptAll
+            this.noCookie = data.noCookie
+            this.dialogIsOpened = data.dialogIsOpened
+            this._options = data.options
+        })()
+    }
 }
 
+export interface StoreNormalized {
+    isDeclineAll: boolean
+    isAcceptAll: boolean
+    noCookie: boolean | undefined
+    dialogIsOpened: boolean
+    options: StoreOptions
+}
