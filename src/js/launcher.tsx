@@ -5,6 +5,7 @@ import { getKernel } from '@code-202/kernel'
 
 export interface Props {
     className?: string
+    alwaysShown?: boolean
 }
 
 export interface State {
@@ -12,7 +13,7 @@ export interface State {
 }
 
 export class Launcher extends React.Component<Props, State> {
-    private store: Store
+    protected store: Store
 
     constructor(props: Props) {
         super(props)
@@ -21,7 +22,7 @@ export class Launcher extends React.Component<Props, State> {
     }
 
     render (): React.ReactNode {
-        if (this.store.noCookie !== false) {
+        if (!this.props.alwaysShown && this.store.noCookie !== false) {
             return null
         }
 

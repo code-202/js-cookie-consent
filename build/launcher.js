@@ -34,7 +34,7 @@ class Launcher extends React.Component {
         this.store = (0, kernel_1.getKernel)().container.get('cookie-consent');
     }
     render() {
-        if (this.store.noCookie !== false) {
+        if (!this.props.alwaysShown && this.store.noCookie !== false) {
             return null;
         }
         return React.createElement(React.Fragment, null,
