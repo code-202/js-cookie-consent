@@ -4,7 +4,7 @@ import { Store } from './store'
 import { getKernel } from '@code-202/kernel'
 
 export interface Props {
-
+    className?: string
 }
 
 export interface State {
@@ -27,7 +27,7 @@ export class Launcher extends React.Component<Props, State> {
 
         return <>
             <button
-                className="cookie-consent-btn"
+                className={ this.props.className || 'cookie-consent-btn' }
                 onClick={() => this.store.toggleDialog()}
                 >
                 { this.renderContent() }

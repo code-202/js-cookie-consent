@@ -38,7 +38,7 @@ class Launcher extends React.Component {
             return null;
         }
         return React.createElement(React.Fragment, null,
-            React.createElement("button", { className: "cookie-consent-btn", onClick: () => this.store.toggleDialog() }, this.renderContent()));
+            React.createElement("button", { className: this.props.className || 'cookie-consent-btn', onClick: () => this.store.toggleDialog() }, this.renderContent()));
     }
     renderContent() {
         return 'Manage cookie consent';
