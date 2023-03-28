@@ -20,10 +20,10 @@ class Service {
         return this._options.needConsent;
     }
     get type() {
-        return this._options.type;
+        return this._options.type || 'default';
     }
     get name() {
-        return this._options.name;
+        return this._options.name !== undefined ? this._options.name : this.type + '.' + this.id;
     }
     get cookies() {
         return this._options.cookies ? this._options.cookies : [];

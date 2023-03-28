@@ -3,7 +3,7 @@ export interface Props {
 }
 export interface State {
 }
-export declare class Dialog extends React.Component<Props, State> {
+declare class Dialog extends React.Component<Props, State> {
     private store;
     constructor(props: Props);
     render(): React.ReactNode;

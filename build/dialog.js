@@ -22,12 +22,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Dialog = void 0;
 const React = __importStar(require("react"));
 const mobx_react_1 = require("mobx-react");
 const reactstrap_1 = require("reactstrap");
 const kernel_1 = require("@code-202/kernel");
+const customize_1 = __importDefault(require("./customize"));
 class Dialog extends React.Component {
     store;
     constructor(props) {
@@ -48,7 +51,10 @@ class Dialog extends React.Component {
         return 'Cookie Consent ?';
     }
     renderModalBody() {
-        return null;
+        if (!this.store.customizing) {
+            return null;
+        }
+        return React.createElement(customize_1.default, null);
     }
     renderButtonAcceptAll() {
         return 'Accept all';
@@ -69,5 +75,4 @@ class Dialog extends React.Component {
         console.log('coming soon...');
     };
 }
-exports.Dialog = Dialog;
 exports.default = (0, mobx_react_1.observer)(Dialog);

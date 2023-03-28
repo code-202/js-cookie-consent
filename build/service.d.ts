@@ -1,16 +1,19 @@
 export interface ServiceDefinition {
     id: string;
     needConsent: boolean;
-    type: string;
-    name: string;
+    type?: string;
+    name?: string;
     cookies?: string[];
 }
 export interface ServiceOptions extends ServiceDefinition {
     onAccept?: () => void;
     onDecline?: () => void;
 }
+export interface ServiceInformations extends ServiceDefinition {
+    consent: ConsentResponse;
+}
 export type ConsentResponse = 'yes' | 'no' | 'unknown';
-export declare class Service implements ServiceDefinition {
+export declare class Service implements ServiceInformations {
     consent: ConsentResponse;
     protected _options: ServiceOptions;
     constructor(options: ServiceOptions);

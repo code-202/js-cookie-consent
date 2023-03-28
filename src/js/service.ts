@@ -3,8 +3,8 @@ import { makeObservable, observable, action } from 'mobx'
 export interface ServiceDefinition {
     id: string
     needConsent: boolean
-    type: string
-    name: string
+    type?: string
+    name?: string
     cookies?: string[]
 }
 
@@ -13,9 +13,13 @@ export interface ServiceOptions extends ServiceDefinition {
     onDecline?: () => void
 }
 
+export interface ServiceInformations extends ServiceDefinition {
+    consent: ConsentResponse
+}
+
 export type ConsentResponse = 'yes' | 'no' | 'unknown'
 
-export class Service implements ServiceDefinition {
+export class Service implements ServiceInformations {
     public consent: ConsentResponse = 'unknown'
     protected _options: ServiceOptions
 
@@ -39,11 +43,11 @@ export class Service implements ServiceDefinition {
     }
 
     public get type (): string {
-        return this._options.type
+        return this._options.type || 'default'
     }
 
     public get name (): string {
-        return this._options.name
+        return this._options.name !== undefined ? this._options.name : this.type+'.'+this.id
     }
 
     public get cookies (): string[] {

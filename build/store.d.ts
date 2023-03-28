@@ -1,5 +1,5 @@
 import Cookies from 'universal-cookie';
-import { ServiceOptions, Service } from './service';
+import { ServiceInformations, ServiceOptions, Service, ConsentResponse } from './service';
 import { Denormalizable, Normalizable } from '@code-202/serializer';
 export interface PartialStoreOptions {
     customizable?: boolean;
@@ -21,22 +21,36 @@ export interface StoreOptions {
         secure: boolean;
     };
 }
+export interface TypeOptions {
+    id: string;
+    needConsent: boolean;
+    choice: ConsentResponse;
+    expanded: boolean;
+    services: ServiceInformations[];
+}
 export declare class Store implements Normalizable<StoreNormalized>, Denormalizable<StoreNormalized> {
     services: Service[];
-    isDeclineAll: boolean;
-    isAcceptAll: boolean;
     noCookie: boolean | undefined;
+    globalConsent: ConsentResponse;
     dialogIsOpened: boolean;
+    customizing: boolean;
+    typesExpanded: string[];
     protected _options: StoreOptions;
     protected _cookies: Cookies;
-    protected initConsents: string[];
     constructor(options: PartialStoreOptions, cookies?: string);
     initialize(): void;
+    get isAcceptAll(): boolean;
+    get isDeclineAll(): boolean;
     toggleDialog(): void;
+    toggleCustomize(): void;
+    toggleType(type: string): void;
+    get types(): TypeOptions[];
     addService(options: ServiceOptions): boolean;
     get isCustomizable(): boolean;
     accept(id: string): void;
     decline(id: string): void;
+    acceptType(type: string): void;
+    declineType(type: string): void;
     acceptAll(): void;
     declineAll(): void;
     get consents(): string[];
@@ -48,8 +62,6 @@ export declare class Store implements Normalizable<StoreNormalized>, Denormaliza
     denormalize(data: StoreNormalized): void;
 }
 export interface StoreNormalized {
-    isDeclineAll: boolean;
-    isAcceptAll: boolean;
     noCookie: boolean | undefined;
     dialogIsOpened: boolean;
 }

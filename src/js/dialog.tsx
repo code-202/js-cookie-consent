@@ -3,6 +3,7 @@ import { observer } from 'mobx-react'
 import { Store } from './store'
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
 import { getKernel } from '@code-202/kernel'
+import Customize from './customize'
 
 export interface Props {
 
@@ -12,7 +13,7 @@ export interface State {
 
 }
 
-export class Dialog extends React.Component<Props, State> {
+class Dialog extends React.Component<Props, State> {
     private store: Store
 
     constructor(props: Props) {
@@ -53,7 +54,11 @@ export class Dialog extends React.Component<Props, State> {
     }
 
     renderModalBody (): React.ReactNode {
-        return null
+        if (!this.store.customizing) {
+            return null
+        }
+
+        return <Customize />
     }
 
     renderButtonAcceptAll (): React.ReactNode {
