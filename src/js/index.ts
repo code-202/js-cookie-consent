@@ -1,11 +1,13 @@
 import { Store, StoreOptions, PartialStoreOptions } from './store'
 import { ServiceDefinition, ServiceOptions, Service, ConsentResponse } from './service'
-import { Dialog } from './dialog'
-import { Launcher } from './launcher'
+import { Dialog, Props as DialogProps } from './dialog'
+import { Launcher, Props as LaucherProps } from './launcher'
 
 export {
     Dialog,
+    DialogProps,
     Launcher,
+    LaucherProps,
     Store,
     StoreOptions,
     PartialStoreOptions,
