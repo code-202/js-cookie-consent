@@ -33,6 +33,7 @@ export declare class Store implements Normalizable<StoreNormalized>, Denormaliza
     noCookie: boolean | undefined;
     globalConsent: ConsentResponse;
     dialogIsOpened: boolean;
+    newServiceSinceLastConsent: boolean;
     customizing: boolean;
     typesExpanded: string[];
     protected _options: StoreOptions;
@@ -54,6 +55,7 @@ export declare class Store implements Normalizable<StoreNormalized>, Denormaliza
     acceptAll(): void;
     declineAll(): void;
     get consents(): string[];
+    get unconsents(): string[];
     protected loadTokenFromCookie(): void;
     get nbNeedConcentServices(): number;
     protected findService(id: string): Service | undefined;

@@ -48,7 +48,7 @@ class Dialog extends React.Component {
                     this.store.isCustomizable && (React.createElement("button", { onClick: this.onCustomizeClickHandler, className: "cookie-consent-dialog-btn-customize" }, this.renderButtonCustomize())))));
     }
     renderModalHeader() {
-        return 'Cookie Consent ?';
+        return this.store.newServiceSinceLastConsent ? 'New cookie from last consent !' : 'Cookie Consent ?';
     }
     renderModalBody() {
         if (!this.store.customizing) {
@@ -72,7 +72,7 @@ class Dialog extends React.Component {
         this.store.acceptAll();
     };
     onCustomizeClickHandler = () => {
-        console.log('coming soon...');
+        this.store.toggleCustomize();
     };
 }
 exports.default = (0, mobx_react_1.observer)(Dialog);

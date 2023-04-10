@@ -14,7 +14,7 @@ export interface State {
 }
 
 class Dialog extends React.Component<Props, State> {
-    private store: Store
+    protected store: Store
 
     constructor(props: Props) {
         super(props)
@@ -50,7 +50,7 @@ class Dialog extends React.Component<Props, State> {
     }
 
     renderModalHeader (): React.ReactNode {
-        return 'Cookie Consent ?'
+        return this.store.newServiceSinceLastConsent ? 'New cookie from last consent !' : 'Cookie Consent ?'
     }
 
     renderModalBody (): React.ReactNode {
@@ -82,7 +82,7 @@ class Dialog extends React.Component<Props, State> {
     }
 
     protected onCustomizeClickHandler = (): void => {
-        console.log('coming soon...')
+        this.store.toggleCustomize()
     }
 }
 

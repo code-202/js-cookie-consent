@@ -237,9 +237,9 @@ test('first', () => {
 })
 
 test('load cookie', () => {
-    expect.assertions(4)
+    expect.assertions(16)
 
-    const store = new Store({customizable: true}, '_cc=s1%7Cs3')
+    const store = new Store({customizable: true}, '_cc=s1%7Cs3!s2')
 
     const callback = fn(res => res)
 
@@ -281,24 +281,82 @@ test('load cookie', () => {
         }
     })
 
-    store.addService({
+    store.initialize()
+    expect(store.consents).toStrictEqual(['s1', 's3'])
+    expect(callback.mock.calls).toHaveLength(3)
+    expect(callback.mock.results[0].value).toBe('enable S1')
+    expect(callback.mock.results[1].value).toBe('enable S3')
+    expect(callback.mock.results[2].value).toBe('disable S2')
+
+    expect(store.nbNeedConcentServices).toBe(0)
+    expect(store.dialogIsOpened).toBe(false)
+    expect(store.newServiceSinceLastConsent).toBe(false)
+
+    const store2 = new Store({customizable: true}, '_cc=s1%7Cs3!s2')
+
+    const callback2 = fn(res => res)
+
+    store2.addService({
+        id: 's1',
+        needConsent: false,
+        type: 't1',
+        cookies: ['_s1'],
+        onAccept: () => {
+            callback2('enable S1')
+        },
+        onDecline: () => {
+            callback2('disable S1')
+        }
+    })
+
+    store2.addService({
+        id: 's2',
+        needConsent: true,
+        cookies: ['_s2'],
+        onAccept: () => {
+            callback2('enable S2')
+        },
+        onDecline: () => {
+            callback2('disable S2')
+        }
+    })
+
+    store2.addService({
+        id: 's3',
+        needConsent: true,
+        type: 't2',
+        cookies: ['_s3.1', '_s3.2'],
+        onAccept: () => {
+            callback2('enable S3')
+        },
+        onDecline: () => {
+            callback2('disable S3')
+        }
+    })
+
+    store2.addService({
         id: 's4',
         needConsent: true,
         type: 't2',
         cookies: ['_s4'],
         onAccept: () => {
-            callback('enable S4')
+            callback2('enable S4')
         },
         onDecline: () => {
-            callback('disable S4')
+            callback2('disable S4')
         }
     })
 
-    store.initialize()
-    expect(store.consents).toStrictEqual(['s1', 's3'])
-    expect(callback.mock.calls).toHaveLength(2)
-    expect(callback.mock.results[0].value).toBe('enable S1')
-    expect(callback.mock.results[1].value).toBe('enable S3')
+    store2.initialize()
+    expect(store2.consents).toStrictEqual(['s1', 's3'])
+    expect(callback2.mock.calls).toHaveLength(3)
+    expect(callback2.mock.results[0].value).toBe('enable S1')
+    expect(callback2.mock.results[1].value).toBe('enable S3')
+    expect(callback2.mock.results[2].value).toBe('disable S2')
+
+    expect(store2.nbNeedConcentServices).toBe(1)
+    expect(store2.dialogIsOpened).toBe(true)
+    expect(store2.newServiceSinceLastConsent).toBe(true)
 })
 
 test('normalize', () => {

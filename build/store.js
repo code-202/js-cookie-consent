@@ -13,6 +13,7 @@ class Store {
     noCookie = undefined;
     globalConsent = 'unknown';
     dialogIsOpened = false;
+    newServiceSinceLastConsent = false;
     customizing = false;
     typesExpanded = [];
     _options;
@@ -23,6 +24,7 @@ class Store {
             noCookie: mobx_1.observable,
             globalConsent: mobx_1.observable,
             dialogIsOpened: mobx_1.observable,
+            newServiceSinceLastConsent: mobx_1.observable,
             customizing: mobx_1.observable,
             typesExpanded: mobx_1.observable,
             consents: mobx_1.computed,
@@ -53,7 +55,8 @@ class Store {
     }
     initialize() {
         this.loadTokenFromCookie();
-        this.dialogIsOpened = this.noCookie === true && this.nbNeedConcentServices > 0;
+        this.dialogIsOpened = this.noCookie === true || this.nbNeedConcentServices > 0;
+        this.newServiceSinceLastConsent = this.noCookie === false && this.nbNeedConcentServices > 0;
     }
     get isAcceptAll() {
         for (const service of this.services) {
@@ -186,6 +189,15 @@ class Store {
         }
         return consents;
     }
+    get unconsents() {
+        const unconsents = [];
+        for (const service of this.services) {
+            if (service.consent == 'no') {
+                unconsents.push(service.id);
+            }
+        }
+        return unconsents;
+    }
     loadTokenFromCookie() {
         const cookie = this._cookies.get(this._options.cookie.name);
         if (cookie === undefined) {
@@ -193,15 +205,24 @@ class Store {
             return;
         }
         this.noCookie = false;
-        for (const id of cookie.split('|')) {
+        const [c, u] = cookie.split('!');
+        for (const id of c.split('|')) {
             const service = this.findService(id);
             if (service) {
                 service.accept();
             }
         }
+        if (u) {
+            for (const id of u.split('|')) {
+                const service = this.findService(id);
+                if (service) {
+                    service.decline();
+                }
+            }
+        }
     }
     get nbNeedConcentServices() {
-        return (this.services.filter((s) => s.needConsent)).length;
+        return (this.services.filter((s) => s.needConsent && s.consent == 'unknown')).length;
     }
     findService(id) {
         for (const service of this.services) {
@@ -217,7 +238,7 @@ class Store {
             maxAge: this._options.cookie.maxAge,
             secure: this._options.cookie.secure,
         };
-        this._cookies.set(this._options.cookie.name, this.consents.join('|'), options);
+        this._cookies.set(this._options.cookie.name, this.consents.join('|') + '!' + this.unconsents.join('|'), options);
         this.noCookie = false;
     }
     normalize() {

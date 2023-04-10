@@ -39,6 +39,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
     public noCookie: boolean | undefined = undefined
     public globalConsent: ConsentResponse = 'unknown'
     public dialogIsOpened: boolean = false
+    public newServiceSinceLastConsent: boolean = false
     public customizing: boolean = false
     public typesExpanded: string[] = []
     protected _options: StoreOptions
@@ -50,6 +51,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
             noCookie: observable,
             globalConsent: observable,
             dialogIsOpened: observable,
+            newServiceSinceLastConsent: observable,
             customizing: observable,
             typesExpanded: observable,
 
@@ -89,7 +91,9 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
     public initialize (): void {
         this.loadTokenFromCookie()
 
-        this.dialogIsOpened = this.noCookie === true && this.nbNeedConcentServices > 0
+        this.dialogIsOpened = this.noCookie === true || this.nbNeedConcentServices > 0
+
+        this.newServiceSinceLastConsent = this.noCookie === false && this.nbNeedConcentServices > 0
     }
 
     public get isAcceptAll(): boolean {
@@ -256,6 +260,18 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         return consents
     }
 
+    public get unconsents (): string[] {
+        const unconsents: string[] = []
+
+        for (const service of this.services) {
+            if (service.consent == 'no') {
+                unconsents.push(service.id)
+            }
+        }
+
+        return unconsents
+    }
+
     protected loadTokenFromCookie (): void {
         const cookie = this._cookies.get(this._options.cookie.name)
 
@@ -266,16 +282,26 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
 
         this.noCookie = false
 
-        for (const id of cookie.split('|')) {
+        const [c, u] = cookie.split('!')
+
+        for (const id of c.split('|')) {
             const service = this.findService(id)
             if (service) {
                 service.accept()
             }
         }
+        if (u) {
+            for (const id of u.split('|')) {
+                const service = this.findService(id)
+                if (service) {
+                    service.decline()
+                }
+            }
+        }
     }
 
     public get nbNeedConcentServices (): number {
-        return (this.services.filter((s: Service) => s.needConsent)).length
+        return (this.services.filter((s: Service) => s.needConsent && s.consent == 'unknown')).length
     }
 
     protected findService (id: string): Service | undefined {
@@ -294,7 +320,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
             secure: this._options.cookie.secure,
         }
 
-        this._cookies.set(this._options.cookie.name, this.consents.join('|'), options)
+        this._cookies.set(this._options.cookie.name, this.consents.join('|')+'!'+this.unconsents.join('|'), options)
 
         this.noCookie = false
     }
