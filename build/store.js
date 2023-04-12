@@ -246,7 +246,9 @@ class Store {
             secure: this._options.cookie.secure,
         };
         this._cookies.set(this._options.cookie.name, this.consents.join('|') + '!' + this.unconsents.join('|'), options);
-        this.noCookie = false;
+        (0, mobx_1.action)(() => {
+            this.noCookie = false;
+        })();
     }
     normalize() {
         const data = {

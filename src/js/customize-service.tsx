@@ -43,7 +43,7 @@ class CustomizeService extends React.Component<Props, State> {
         return <Button
             color="primary"
             outline={this.props.service.consent != 'yes'}
-            onClick={() => this.props.store.acceptType(this.props.service.id)}
+            onClick={() => this.props.store.accept(this.props.service.id)}
             >
             { this.renderAcceptContent(this.props.service.consent) }
         </Button>
@@ -57,7 +57,7 @@ class CustomizeService extends React.Component<Props, State> {
         return <Button
             color="primary"
             outline={this.props.service.consent != 'no'}
-            onClick={() => this.props.store.declineType(this.props.service.id)}
+            onClick={() => this.props.store.decline(this.props.service.id)}
             className="ms-2"
             >
             { this.renderDeclineContent(this.props.service.consent) }

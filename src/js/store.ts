@@ -335,7 +335,9 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
 
         this._cookies.set(this._options.cookie.name, this.consents.join('|')+'!'+this.unconsents.join('|'), options)
 
-        this.noCookie = false
+        action(() => {
+            this.noCookie = false
+        })()
     }
 
     normalize (): StoreNormalized {

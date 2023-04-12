@@ -20,7 +20,7 @@ class CustomizeType extends React.Component<Props, State> {
         const { store, type } = this.props
 
         return <>
-            <div className="d-flex justify-content-between border-top pt-2">
+            <div className="d-flex justify-content-between border-top py-2">
                 { this.renderTypeName() }
                 <div>
                     { type.needConsent ? (
@@ -42,9 +42,10 @@ class CustomizeType extends React.Component<Props, State> {
     }
 
     renderTypeName (): React.ReactNode {
-        return <>
+        return <div>
             <Button
                 color="primary"
+                size="sm"
                 outline={this.props.type.expanded}
                 onClick={() => this.props.store.toggleType(this.props.type.id)}
                 className="me-2"
@@ -52,7 +53,7 @@ class CustomizeType extends React.Component<Props, State> {
                 { this.renderToggleTypeContent() }
             </Button>
             <span>{ this.props.type.id }</span>
-        </>
+        </div>
     }
 
     renderToggleTypeContent (): React.ReactNode {

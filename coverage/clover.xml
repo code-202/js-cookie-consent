@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1681330377522" clover="3.2.0">
-  <project timestamp="1681330377522" name="All files">
-    <metrics statements="240" coveredstatements="182" conditionals="69" coveredconditionals="51" methods="83" coveredmethods="38" elements="392" coveredelements="271" complexity="0" loc="240" ncloc="240" packages="1" files="8" classes="8"/>
+<coverage generated="1681330998970" clover="3.2.0">
+  <project timestamp="1681330998970" name="All files">
+    <metrics statements="243" coveredstatements="183" conditionals="71" coveredconditionals="51" methods="84" coveredmethods="39" elements="398" coveredelements="273" complexity="0" loc="243" ncloc="243" packages="1" files="8" classes="8"/>
     <file name="customize-service.tsx" path="/srv/src/js/customize-service.tsx">
       <metrics statements="14" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="9" coveredmethods="0"/>
       <line num="1" count="2" type="stmt"/>
@@ -29,17 +29,17 @@
       <line num="22" count="0" type="stmt"/>
       <line num="38" count="0" type="stmt"/>
       <line num="45" count="0" type="stmt"/>
-      <line num="49" count="0" type="stmt"/>
-      <line num="59" count="0" type="stmt"/>
-      <line num="63" count="0" type="stmt"/>
-      <line num="66" count="0" type="stmt"/>
-      <line num="73" count="0" type="stmt"/>
-      <line num="77" count="0" type="stmt"/>
-      <line num="80" count="0" type="stmt"/>
-      <line num="88" count="0" type="stmt"/>
-      <line num="92" count="0" type="stmt"/>
-      <line num="96" count="0" type="stmt"/>
-      <line num="100" count="2" type="stmt"/>
+      <line num="50" count="0" type="stmt"/>
+      <line num="60" count="0" type="stmt"/>
+      <line num="64" count="0" type="stmt"/>
+      <line num="67" count="0" type="stmt"/>
+      <line num="74" count="0" type="stmt"/>
+      <line num="78" count="0" type="stmt"/>
+      <line num="81" count="0" type="stmt"/>
+      <line num="89" count="0" type="stmt"/>
+      <line num="93" count="0" type="stmt"/>
+      <line num="97" count="0" type="stmt"/>
+      <line num="101" count="2" type="stmt"/>
     </file>
     <file name="customize.tsx" path="/srv/src/js/customize.tsx">
       <metrics statements="11" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
@@ -56,7 +56,7 @@
       <line num="38" count="2" type="stmt"/>
     </file>
     <file name="dialog.tsx" path="/srv/src/js/dialog.tsx">
-      <metrics statements="27" coveredstatements="6" conditionals="9" coveredconditionals="0" methods="14" coveredmethods="0"/>
+      <metrics statements="29" coveredstatements="6" conditionals="11" coveredconditionals="0" methods="14" coveredmethods="0"/>
       <line num="1" count="2" type="stmt"/>
       <line num="2" count="2" type="stmt"/>
       <line num="4" count="2" type="stmt"/>
@@ -82,8 +82,10 @@
       <line num="95" count="0" type="stmt"/>
       <line num="96" count="0" type="stmt"/>
       <line num="99" count="0" type="stmt"/>
-      <line num="100" count="0" type="stmt"/>
-      <line num="104" count="2" type="stmt"/>
+      <line num="100" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="101" count="0" type="stmt"/>
+      <line num="103" count="0" type="stmt"/>
+      <line num="108" count="2" type="stmt"/>
     </file>
     <file name="index.ts" path="/srv/src/js/index.ts">
       <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
@@ -142,7 +144,7 @@
       <line num="87" count="11" type="stmt"/>
     </file>
     <file name="store.ts" path="/srv/src/js/store.ts">
-      <metrics statements="122" coveredstatements="122" conditionals="41" coveredconditionals="41" methods="27" coveredmethods="27"/>
+      <metrics statements="123" coveredstatements="123" conditionals="41" coveredconditionals="41" methods="28" coveredmethods="28"/>
       <line num="1" count="2" type="stmt"/>
       <line num="2" count="2" type="stmt"/>
       <line num="3" count="2" type="stmt"/>
@@ -260,11 +262,12 @@
       <line num="329" count="11" type="stmt"/>
       <line num="336" count="11" type="stmt"/>
       <line num="338" count="11" type="stmt"/>
-      <line num="342" count="2" type="stmt"/>
-      <line num="347" count="2" type="stmt"/>
-      <line num="351" count="2" type="stmt"/>
-      <line num="352" count="2" type="stmt"/>
+      <line num="339" count="11" type="stmt"/>
+      <line num="344" count="2" type="stmt"/>
+      <line num="349" count="2" type="stmt"/>
       <line num="353" count="2" type="stmt"/>
+      <line num="354" count="2" type="stmt"/>
+      <line num="355" count="2" type="stmt"/>
     </file>
   </project>
 </coverage>

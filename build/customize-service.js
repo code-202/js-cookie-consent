@@ -44,13 +44,13 @@ class CustomizeService extends React.Component {
             ")");
     }
     renderAccept() {
-        return React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.service.consent != 'yes', onClick: () => this.props.store.acceptType(this.props.service.id) }, this.renderAcceptContent(this.props.service.consent));
+        return React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.service.consent != 'yes', onClick: () => this.props.store.accept(this.props.service.id) }, this.renderAcceptContent(this.props.service.consent));
     }
     renderAcceptContent(choice) {
         return 'Accept';
     }
     renderDecline() {
-        return React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.service.consent != 'no', onClick: () => this.props.store.declineType(this.props.service.id), className: "ms-2" }, this.renderDeclineContent(this.props.service.consent));
+        return React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.service.consent != 'no', onClick: () => this.props.store.decline(this.props.service.id), className: "ms-2" }, this.renderDeclineContent(this.props.service.consent));
     }
     renderDeclineContent(choice) {
         return 'Decline';
