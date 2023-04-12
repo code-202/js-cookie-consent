@@ -43,11 +43,11 @@ class Dialog extends React.Component {
                 React.createElement(reactstrap_1.ModalHeader, { className: "cookie-consent-dialog-body", toggle: this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined }, this.renderModalHeader()),
                 React.createElement(reactstrap_1.ModalBody, { className: "cookie-consent-dialog-body" }, this.renderModalBody()),
                 React.createElement(reactstrap_1.ModalFooter, { className: "cookie-consent-dialog-footer" },
-                    React.createElement(reactstrap_1.Collapse, { isOpen: !this.store.customizing, className: "justify-content-between" },
+                    React.createElement(reactstrap_1.Collapse, { isOpen: !this.store.customizing, className: "w-100 d-flex justify-content-between" },
                         React.createElement("button", { onClick: this.onAcceptClickHandler, className: "cookie-consent-dialog-btn-accept" }, this.renderButtonAcceptAll()),
                         React.createElement("button", { onClick: this.onDeclineClickHandler, className: "cookie-consent-dialog-btn-decline" }, this.renderButtonDeclineAll()),
                         this.store.isCustomizable && (React.createElement("button", { onClick: this.onCustomizeClickHandler, className: "cookie-consent-dialog-btn-customize" }, this.renderButtonCustomize()))),
-                    React.createElement(reactstrap_1.Collapse, { isOpen: this.store.customizing, className: "justify-content-between" },
+                    React.createElement(reactstrap_1.Collapse, { isOpen: this.store.customizing },
                         React.createElement("button", { onClick: this.onCloseClickHandler, className: "cookie-consent-dialog-btn-close" }, this.renderButtonClose())))));
     }
     renderModalHeader() {

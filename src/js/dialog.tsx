@@ -33,7 +33,7 @@ class Dialog extends React.Component<Props, State> {
                     { this.renderModalBody() }
                 </ModalBody>
                 <ModalFooter className="cookie-consent-dialog-footer">
-                    <Collapse isOpen={!this.store.customizing} className="justify-content-between">
+                    <Collapse isOpen={!this.store.customizing} className="w-100 d-flex justify-content-between">
                         <button onClick={this.onAcceptClickHandler} className="cookie-consent-dialog-btn-accept">
                             { this.renderButtonAcceptAll() }
                         </button>
@@ -46,7 +46,7 @@ class Dialog extends React.Component<Props, State> {
                             </button>
                         )}
                     </Collapse>
-                    <Collapse isOpen={this.store.customizing} className="justify-content-between">
+                    <Collapse isOpen={this.store.customizing}>
                         <button onClick={this.onCloseClickHandler}  className="cookie-consent-dialog-btn-close">
                             { this.renderButtonClose() }
                         </button>
