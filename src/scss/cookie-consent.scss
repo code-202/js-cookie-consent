@@ -6,8 +6,6 @@
 }
 
 .cookie-consent-dialog-footer {
-    @extend .d-flex;
-    @extend .justify-content-between;
 
     .cookie-consent-dialog-btn-accept {
         @extend .btn;
