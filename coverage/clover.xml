@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1681332286427" clover="3.2.0">
-  <project timestamp="1681332286427" name="All files">
+<coverage generated="1681332403197" clover="3.2.0">
+  <project timestamp="1681332403197" name="All files">
     <metrics statements="243" coveredstatements="183" conditionals="71" coveredconditionals="51" methods="84" coveredmethods="39" elements="398" coveredelements="273" complexity="0" loc="243" ncloc="243" packages="1" files="8" classes="8"/>
     <file name="customize-service.tsx" path="/srv/src/js/customize-service.tsx">
       <metrics statements="14" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="9" coveredmethods="0"/>

@@ -33,8 +33,8 @@ class Dialog extends React.Component<Props, State> {
                     { this.renderModalBody() }
                 </ModalBody>
                 <ModalFooter className="cookie-consent-dialog-footer">
-                    <Collapse isOpen={!this.store.customizing}>
-                        <div className="w-100 d-flex justify-content-between">
+                    <Collapse isOpen={!this.store.customizing} className="w-100">
+                        <div className="d-flex justify-content-between">
                             <button onClick={this.onAcceptClickHandler} className="cookie-consent-dialog-btn-accept">
                                 { this.renderButtonAcceptAll() }
                             </button>
