@@ -25,7 +25,7 @@ class Dialog extends React.Component<Props, State> {
     render (): React.ReactNode {
 
         return <>
-            <Modal isOpen={this.store.dialogIsOpened} centered toggle={this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined}>
+            <Modal isOpen={this.store.dialogIsOpened} centered toggle={this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined} className="cookie-consent-dialog">
                 <ModalHeader className="cookie-consent-dialog-body" toggle={this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined}>
                     { this.renderModalHeader() }
                 </ModalHeader>

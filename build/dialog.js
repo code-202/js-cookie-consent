@@ -39,7 +39,7 @@ class Dialog extends React.Component {
     }
     render() {
         return React.createElement(React.Fragment, null,
-            React.createElement(reactstrap_1.Modal, { isOpen: this.store.dialogIsOpened, centered: true, toggle: this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined },
+            React.createElement(reactstrap_1.Modal, { isOpen: this.store.dialogIsOpened, centered: true, toggle: this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined, className: "cookie-consent-dialog" },
                 React.createElement(reactstrap_1.ModalHeader, { className: "cookie-consent-dialog-body", toggle: this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined }, this.renderModalHeader()),
                 React.createElement(reactstrap_1.ModalBody, { className: "cookie-consent-dialog-body" }, this.renderModalBody()),
                 React.createElement(reactstrap_1.ModalFooter, { className: "cookie-consent-dialog-footer" },
