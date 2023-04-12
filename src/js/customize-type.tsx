@@ -52,8 +52,12 @@ class CustomizeType extends React.Component<Props, State> {
                 >
                 { this.renderToggleTypeContent() }
             </Button>
-            <span>{ this.props.type.id }</span>
+            { this.renderTypeNameContent() }
         </div>
+    }
+
+    renderTypeNameContent (): React.ReactNode {
+        return <span>{ this.props.type.id }</span>
     }
 
     renderToggleTypeContent (): React.ReactNode {

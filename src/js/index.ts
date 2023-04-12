@@ -1,5 +1,5 @@
-import { Store, StoreOptions, PartialStoreOptions } from './store'
-import { ServiceDefinition, ServiceOptions, Service, ConsentResponse } from './service'
+import { Store, StoreOptions, PartialStoreOptions, TypeOptions } from './store'
+import { ServiceDefinition, ServiceInformations, ServiceOptions, Service, ConsentResponse } from './service'
 import Dialog, { Props as DialogProps } from './dialog'
 import { Launcher, Props as LaucherProps } from './launcher'
 import Customize, { Props as CustomizerProps } from './customize'
@@ -21,7 +21,9 @@ export {
     StoreOptions,
     PartialStoreOptions,
     ServiceDefinition,
+    ServiceInformations,
     ServiceOptions,
     Service,
+    TypeOptions,
     ConsentResponse
 }

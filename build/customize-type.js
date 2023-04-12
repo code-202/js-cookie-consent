@@ -45,7 +45,10 @@ class CustomizeType extends React.Component {
     renderTypeName() {
         return React.createElement("div", null,
             React.createElement(reactstrap_1.Button, { color: "primary", size: "sm", outline: this.props.type.expanded, onClick: () => this.props.store.toggleType(this.props.type.id), className: "me-2" }, this.renderToggleTypeContent()),
-            React.createElement("span", null, this.props.type.id));
+            this.renderTypeNameContent());
+    }
+    renderTypeNameContent() {
+        return React.createElement("span", null, this.props.type.id);
     }
     renderToggleTypeContent() {
         return '+';

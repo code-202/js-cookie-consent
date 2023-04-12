@@ -10,6 +10,7 @@ export interface State {
 declare class CustomizeType extends React.Component<Props, State> {
     render(): React.ReactNode;
     renderTypeName(): React.ReactNode;
+    renderTypeNameContent(): React.ReactNode;
     renderToggleTypeContent(): React.ReactNode;
     renderAcceptAll(): React.ReactNode;
     renderAcceptAllContent(choice: ConsentResponse): React.ReactNode;

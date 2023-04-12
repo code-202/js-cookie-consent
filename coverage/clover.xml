@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1681332403197" clover="3.2.0">
-  <project timestamp="1681332403197" name="All files">
-    <metrics statements="243" coveredstatements="183" conditionals="71" coveredconditionals="51" methods="84" coveredmethods="39" elements="398" coveredelements="273" complexity="0" loc="243" ncloc="243" packages="1" files="8" classes="8"/>
+<coverage generated="1681333065264" clover="3.2.0">
+  <project timestamp="1681333065264" name="All files">
+    <metrics statements="244" coveredstatements="183" conditionals="71" coveredconditionals="51" methods="85" coveredmethods="39" elements="400" coveredelements="273" complexity="0" loc="244" ncloc="244" packages="1" files="8" classes="8"/>
     <file name="customize-service.tsx" path="/srv/src/js/customize-service.tsx">
       <metrics statements="14" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="9" coveredmethods="0"/>
       <line num="1" count="2" type="stmt"/>
@@ -20,7 +20,7 @@
       <line num="76" count="2" type="stmt"/>
     </file>
     <file name="customize-type.tsx" path="/srv/src/js/customize-type.tsx">
-      <metrics statements="19" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="13" coveredmethods="0"/>
+      <metrics statements="20" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="14" coveredmethods="0"/>
       <line num="1" count="2" type="stmt"/>
       <line num="2" count="2" type="stmt"/>
       <line num="4" count="2" type="stmt"/>
@@ -32,14 +32,15 @@
       <line num="50" count="0" type="stmt"/>
       <line num="60" count="0" type="stmt"/>
       <line num="64" count="0" type="stmt"/>
-      <line num="67" count="0" type="stmt"/>
-      <line num="74" count="0" type="stmt"/>
+      <line num="68" count="0" type="stmt"/>
+      <line num="71" count="0" type="stmt"/>
       <line num="78" count="0" type="stmt"/>
-      <line num="81" count="0" type="stmt"/>
-      <line num="89" count="0" type="stmt"/>
+      <line num="82" count="0" type="stmt"/>
+      <line num="85" count="0" type="stmt"/>
       <line num="93" count="0" type="stmt"/>
       <line num="97" count="0" type="stmt"/>
-      <line num="101" count="2" type="stmt"/>
+      <line num="101" count="0" type="stmt"/>
+      <line num="105" count="2" type="stmt"/>
     </file>
     <file name="customize.tsx" path="/srv/src/js/customize.tsx">
       <metrics statements="11" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
@@ -102,7 +103,7 @@
       <line num="16" count="2" type="stmt"/>
       <line num="18" count="2" type="stmt"/>
       <line num="20" count="7" type="stmt"/>
-      <line num="25" count="6" type="stmt"/>
+      <line num="26" count="6" type="stmt"/>
     </file>
     <file name="launcher.tsx" path="/srv/src/js/launcher.tsx">
       <metrics statements="12" coveredstatements="5" conditionals="5" coveredconditionals="0" methods="4" coveredmethods="0"/>
