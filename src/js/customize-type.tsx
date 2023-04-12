@@ -20,7 +20,7 @@ class CustomizeType extends React.Component<Props, State> {
         const { store, type } = this.props
 
         return <>
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between border-top pt-2">
                 { this.renderTypeName() }
                 <div>
                     { type.needConsent ? (
@@ -42,7 +42,21 @@ class CustomizeType extends React.Component<Props, State> {
     }
 
     renderTypeName (): React.ReactNode {
-        return <span>{ this.props.type.id }</span>
+        return <>
+            <Button
+                color="primary"
+                outline={this.props.type.expanded}
+                onClick={() => this.props.store.toggleType(this.props.type.id)}
+                className="me-2"
+                >
+                { this.renderToggleTypeContent() }
+            </Button>
+            <span>{ this.props.type.id }</span>
+        </>
+    }
+
+    renderToggleTypeContent (): React.ReactNode {
+        return '+'
     }
 
     renderAcceptAll (): React.ReactNode {
@@ -64,6 +78,7 @@ class CustomizeType extends React.Component<Props, State> {
             color="primary"
             outline={this.props.type.choice != 'no'}
             onClick={() => this.props.store.declineType(this.props.type.id)}
+            className="ms-2"
             >
             { this.renderDeclineAllContent(this.props.type.choice) }
         </Button>

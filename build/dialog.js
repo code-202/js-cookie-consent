@@ -43,9 +43,12 @@ class Dialog extends React.Component {
                 React.createElement(reactstrap_1.ModalHeader, { className: "cookie-consent-dialog-body", toggle: this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined }, this.renderModalHeader()),
                 React.createElement(reactstrap_1.ModalBody, { className: "cookie-consent-dialog-body" }, this.renderModalBody()),
                 React.createElement(reactstrap_1.ModalFooter, { className: "cookie-consent-dialog-footer" },
-                    React.createElement("button", { onClick: this.onAcceptClickHandler, className: "cookie-consent-dialog-btn-accept" }, this.renderButtonAcceptAll()),
-                    React.createElement("button", { onClick: this.onDeclineClickHandler, className: "cookie-consent-dialog-btn-decline" }, this.renderButtonDeclineAll()),
-                    this.store.isCustomizable && (React.createElement("button", { onClick: this.onCustomizeClickHandler, className: "cookie-consent-dialog-btn-customize" }, this.renderButtonCustomize())))));
+                    React.createElement(reactstrap_1.Collapse, { isOpen: !this.store.customizing },
+                        React.createElement("button", { onClick: this.onAcceptClickHandler, className: "cookie-consent-dialog-btn-accept" }, this.renderButtonAcceptAll()),
+                        React.createElement("button", { onClick: this.onDeclineClickHandler, className: "cookie-consent-dialog-btn-decline" }, this.renderButtonDeclineAll()),
+                        this.store.isCustomizable && (React.createElement("button", { onClick: this.onCustomizeClickHandler, className: "cookie-consent-dialog-btn-customize" }, this.renderButtonCustomize()))),
+                    React.createElement(reactstrap_1.Collapse, { isOpen: this.store.customizing },
+                        React.createElement("button", { onClick: this.onCloseClickHandler, className: "cookie-consent-dialog-btn-close", disabled: !this.store.isClosable }, this.renderButtonClose())))));
     }
     renderModalHeader() {
         return this.store.newServiceSinceLastConsent ? 'New cookie from last consent !' : 'Cookie Consent ?';
@@ -65,6 +68,9 @@ class Dialog extends React.Component {
     renderButtonCustomize() {
         return 'Customize';
     }
+    renderButtonClose() {
+        return 'Close';
+    }
     onDeclineClickHandler = () => {
         this.store.declineAll();
     };
@@ -73,6 +79,9 @@ class Dialog extends React.Component {
     };
     onCustomizeClickHandler = () => {
         this.store.toggleCustomize();
+    };
+    onCloseClickHandler = () => {
+        this.store.toggleDialog();
     };
 }
 exports.default = (0, mobx_react_1.observer)(Dialog);

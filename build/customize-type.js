@@ -34,7 +34,7 @@ class CustomizeType extends React.Component {
     render() {
         const { store, type } = this.props;
         return React.createElement(React.Fragment, null,
-            React.createElement("div", { className: "d-flex justify-content-between" },
+            React.createElement("div", { className: "d-flex justify-content-between border-top pt-2" },
                 this.renderTypeName(),
                 React.createElement("div", null, type.needConsent ? (React.createElement(React.Fragment, null,
                     this.renderAcceptAll(),
@@ -43,7 +43,12 @@ class CustomizeType extends React.Component {
                 React.createElement(reactstrap_1.ListGroup, { flush: true }, type.services.map((service) => this.renderService(service)))));
     }
     renderTypeName() {
-        return React.createElement("span", null, this.props.type.id);
+        return React.createElement(React.Fragment, null,
+            React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.type.expanded, onClick: () => this.props.store.toggleType(this.props.type.id), className: "me-2" }, this.renderToggleTypeContent()),
+            React.createElement("span", null, this.props.type.id));
+    }
+    renderToggleTypeContent() {
+        return '+';
     }
     renderAcceptAll() {
         return React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.type.choice != 'yes', onClick: () => this.props.store.acceptType(this.props.type.id) }, this.renderAcceptAllContent(this.props.type.choice));
@@ -52,7 +57,7 @@ class CustomizeType extends React.Component {
         return 'Accept all';
     }
     renderDeclineAll() {
-        return React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.type.choice != 'no', onClick: () => this.props.store.declineType(this.props.type.id) }, this.renderDeclineAllContent(this.props.type.choice));
+        return React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.type.choice != 'no', onClick: () => this.props.store.declineType(this.props.type.id), className: "ms-2" }, this.renderDeclineAllContent(this.props.type.choice));
     }
     renderDeclineAllContent(choice) {
         return 'Decline all';

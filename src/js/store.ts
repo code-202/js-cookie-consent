@@ -91,9 +91,14 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
     public initialize (): void {
         this.loadTokenFromCookie()
 
-        this.dialogIsOpened = this.noCookie === true || this.nbNeedConcentServices > 0
+        this.dialogIsOpened = !this.isClosable
 
         this.newServiceSinceLastConsent = this.noCookie === false && this.nbNeedConcentServices > 0
+    }
+
+    public get isClosable(): boolean
+    {
+        return this.noCookie !== true && this.nbNeedConcentServices == 0
     }
 
     public get isAcceptAll(): boolean {
@@ -120,7 +125,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
 
         this.dialogIsOpened = !this.dialogIsOpened
 
-        if (!this.dialogIsOpened && this.noCookie === true && this.nbNeedConcentServices > 0) {
+        if (!this.dialogIsOpened && !this.isClosable) {
             this.dialogIsOpened = true
         }
     }
@@ -195,6 +200,8 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
 
         if (service) {
             service.accept()
+
+            this.saveConsentsInCookie()
         }
     }
 
@@ -203,6 +210,8 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
 
         if (service && service.needConsent) {
             service.decline()
+
+            this.saveConsentsInCookie()
         }
     }
 
@@ -210,6 +219,8 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         for (const service of this.services) {
             if (service.type == type) {
                 service.accept()
+
+                this.saveConsentsInCookie()
             }
         }
     }
@@ -218,6 +229,8 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         for (const service of this.services) {
             if (service.type == type && service.needConsent) {
                 service.decline()
+
+                this.saveConsentsInCookie()
             }
         }
     }

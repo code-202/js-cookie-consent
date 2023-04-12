@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { observer } from 'mobx-react'
 import { Store } from './store'
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
+import { Button, Collapse, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
 import { getKernel } from '@code-202/kernel'
 import Customize from './customize'
 
@@ -33,17 +33,24 @@ class Dialog extends React.Component<Props, State> {
                     { this.renderModalBody() }
                 </ModalBody>
                 <ModalFooter className="cookie-consent-dialog-footer">
-                    <button onClick={this.onAcceptClickHandler} className="cookie-consent-dialog-btn-accept">
-                        { this.renderButtonAcceptAll() }
-                    </button>
-                    <button onClick={this.onDeclineClickHandler} className="cookie-consent-dialog-btn-decline">
-                        { this.renderButtonDeclineAll() }
-                    </button>
-                    { this.store.isCustomizable && (
-                        <button onClick={this.onCustomizeClickHandler}  className="cookie-consent-dialog-btn-customize">
-                            { this.renderButtonCustomize() }
+                    <Collapse isOpen={!this.store.customizing}>
+                        <button onClick={this.onAcceptClickHandler} className="cookie-consent-dialog-btn-accept">
+                            { this.renderButtonAcceptAll() }
                         </button>
-                    )}
+                        <button onClick={this.onDeclineClickHandler} className="cookie-consent-dialog-btn-decline">
+                            { this.renderButtonDeclineAll() }
+                        </button>
+                        { this.store.isCustomizable && (
+                            <button onClick={this.onCustomizeClickHandler}  className="cookie-consent-dialog-btn-customize">
+                                { this.renderButtonCustomize() }
+                            </button>
+                        )}
+                    </Collapse>
+                    <Collapse isOpen={this.store.customizing}>
+                        <button onClick={this.onCloseClickHandler}  className="cookie-consent-dialog-btn-close" disabled={!this.store.isClosable}>
+                            { this.renderButtonClose() }
+                        </button>
+                    </Collapse>
                 </ModalFooter>
             </Modal>
         </>
@@ -73,6 +80,10 @@ class Dialog extends React.Component<Props, State> {
         return 'Customize'
     }
 
+    renderButtonClose (): React.ReactNode {
+        return 'Close'
+    }
+
     protected onDeclineClickHandler = (): void => {
         this.store.declineAll()
     }
@@ -83,6 +94,10 @@ class Dialog extends React.Component<Props, State> {
 
     protected onCustomizeClickHandler = (): void => {
         this.store.toggleCustomize()
+    }
+
+    protected onCloseClickHandler = (): void => {
+        this.store.toggleDialog()
     }
 }
 

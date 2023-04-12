@@ -50,7 +50,7 @@ class CustomizeService extends React.Component {
         return 'Accept';
     }
     renderDecline() {
-        return React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.service.consent != 'no', onClick: () => this.props.store.declineType(this.props.service.id) }, this.renderDeclineContent(this.props.service.consent));
+        return React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.service.consent != 'no', onClick: () => this.props.store.declineType(this.props.service.id), className: "ms-2" }, this.renderDeclineContent(this.props.service.consent));
     }
     renderDeclineContent(choice) {
         return 'Decline';

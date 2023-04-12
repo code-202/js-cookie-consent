@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">22.22% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/24</span>
+                <span class='fraction'>6/27</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">22.22% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/24</span>
+                <span class='fraction'>6/27</span>
             </div>
         
             
@@ -152,7 +152,22 @@
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -204,15 +219,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,9 +231,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -244,7 +274,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as React from 'react'
 import { observer } from 'mobx-react'
 import { Store } from './store'
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
+import { Button, Collapse, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
 import { getKernel } from '@code-202/kernel'
 import Customize from './customize'
 &nbsp;
@@ -276,17 +306,24 @@ class Dialog extends React.Component&lt;Props, State&gt; {
                     { this.renderModalBody() }
                 &lt;/ModalBody&gt;
                 &lt;ModalFooter className="cookie-consent-dialog-footer"&gt;
-                    &lt;button onClick={this.onAcceptClickHandler} className="cookie-consent-dialog-btn-accept"&gt;
-                        { this.renderButtonAcceptAll() }
-                    &lt;/button&gt;
-                    &lt;button onClick={this.onDeclineClickHandler} className="cookie-consent-dialog-btn-decline"&gt;
-                        { this.renderButtonDeclineAll() }
-                    &lt;/button&gt;
-                    { this.store.isCustomizable &amp;&amp; (
-                        &lt;button onClick={this.onCustomizeClickHandler}  className="cookie-consent-dialog-btn-customize"&gt;
-                            { this.renderButtonCustomize() }
+                    &lt;Collapse isOpen={!this.store.customizing}&gt;
+                        &lt;button onClick={this.onAcceptClickHandler} className="cookie-consent-dialog-btn-accept"&gt;
+                            { this.renderButtonAcceptAll() }
                         &lt;/button&gt;
-                    )}
+                        &lt;button onClick={this.onDeclineClickHandler} className="cookie-consent-dialog-btn-decline"&gt;
+                            { this.renderButtonDeclineAll() }
+                        &lt;/button&gt;
+                        { this.store.isCustomizable &amp;&amp; (
+                            &lt;button onClick={this.onCustomizeClickHandler}  className="cookie-consent-dialog-btn-customize"&gt;
+                                { this.renderButtonCustomize() }
+                            &lt;/button&gt;
+                        )}
+                    &lt;/Collapse&gt;
+                    &lt;Collapse isOpen={this.store.customizing}&gt;
+                        &lt;button onClick={this.onCloseClickHandler}  className="cookie-consent-dialog-btn-close" disabled={!this.store.isClosable}&gt;
+                            { this.renderButtonClose() }
+                        &lt;/button&gt;
+                    &lt;/Collapse&gt;
                 &lt;/ModalFooter&gt;
             &lt;/Modal&gt;
         &lt;/&gt;
@@ -316,6 +353,10 @@ class Dialog extends React.Component&lt;Props, State&gt; {
 <span class="cstat-no" title="statement not covered" >        return 'Customize'</span>
     }
 &nbsp;
+<span class="fstat-no" title="function not covered" >    renderButtonClose </span>(): React.ReactNode {
+<span class="cstat-no" title="statement not covered" >        return 'Close'</span>
+    }
+&nbsp;
     protected onDeclineClickHandler = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(): void =</span>&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        this.store.declineAll()</span>
     }
@@ -327,6 +368,10 @@ class Dialog extends React.Component&lt;Props, State&gt; {
     protected onCustomizeClickHandler = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(): void =</span>&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        this.store.toggleCustomize()</span>
     }
+&nbsp;
+    protected onCloseClickHandler = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(): void =</span>&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        this.store.toggleDialog()</span>
+    }
 }
 &nbsp;
 export default observer(Dialog)
@@ -337,7 +382,7 @@ export default observer(Dialog)
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-10T20:23:17.208Z
+                at 2023-04-12T20:12:57.512Z
             </div>
         <script src="prettify.js"></script>
         <script>

@@ -40,6 +40,7 @@ export declare class Store implements Normalizable<StoreNormalized>, Denormaliza
     protected _cookies: Cookies;
     constructor(options: PartialStoreOptions, cookies?: string);
     initialize(): void;
+    get isClosable(): boolean;
     get isAcceptAll(): boolean;
     get isDeclineAll(): boolean;
     toggleDialog(): void;

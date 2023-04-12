@@ -23,4 +23,9 @@
         @extend .btn;
         @extend .btn-secondary;
     }
+
+    .cookie-consent-dialog-btn-close {
+        @extend .btn;
+        @extend .btn-secondary;
+    }
 }

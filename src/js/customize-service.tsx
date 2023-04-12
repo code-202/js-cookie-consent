@@ -58,6 +58,7 @@ class CustomizeService extends React.Component<Props, State> {
             color="primary"
             outline={this.props.service.consent != 'no'}
             onClick={() => this.props.store.declineType(this.props.service.id)}
+            className="ms-2"
             >
             { this.renderDeclineContent(this.props.service.consent) }
         </Button>

@@ -13,9 +13,11 @@ declare class Dialog extends React.Component<Props, State> {
     renderButtonAcceptAll(): React.ReactNode;
     renderButtonDeclineAll(): React.ReactNode;
     renderButtonCustomize(): React.ReactNode;
+    renderButtonClose(): React.ReactNode;
     protected onDeclineClickHandler: () => void;
     protected onAcceptClickHandler: () => void;
     protected onCustomizeClickHandler: () => void;
+    protected onCloseClickHandler: () => void;
 }
 declare const _default: typeof Dialog;
 export default _default;

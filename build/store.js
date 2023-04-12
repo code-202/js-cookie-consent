@@ -55,8 +55,11 @@ class Store {
     }
     initialize() {
         this.loadTokenFromCookie();
-        this.dialogIsOpened = this.noCookie === true || this.nbNeedConcentServices > 0;
+        this.dialogIsOpened = !this.isClosable;
         this.newServiceSinceLastConsent = this.noCookie === false && this.nbNeedConcentServices > 0;
+    }
+    get isClosable() {
+        return this.noCookie !== true && this.nbNeedConcentServices == 0;
     }
     get isAcceptAll() {
         for (const service of this.services) {
@@ -76,7 +79,7 @@ class Store {
     }
     toggleDialog() {
         this.dialogIsOpened = !this.dialogIsOpened;
-        if (!this.dialogIsOpened && this.noCookie === true && this.nbNeedConcentServices > 0) {
+        if (!this.dialogIsOpened && !this.isClosable) {
             this.dialogIsOpened = true;
         }
     }
@@ -140,18 +143,21 @@ class Store {
         const service = this.findService(id);
         if (service) {
             service.accept();
+            this.saveConsentsInCookie();
         }
     }
     decline(id) {
         const service = this.findService(id);
         if (service && service.needConsent) {
             service.decline();
+            this.saveConsentsInCookie();
         }
     }
     acceptType(type) {
         for (const service of this.services) {
             if (service.type == type) {
                 service.accept();
+                this.saveConsentsInCookie();
             }
         }
     }
@@ -159,6 +165,7 @@ class Store {
         for (const service of this.services) {
             if (service.type == type && service.needConsent) {
                 service.decline();
+                this.saveConsentsInCookie();
             }
         }
     }
