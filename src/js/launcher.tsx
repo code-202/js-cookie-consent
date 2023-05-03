@@ -33,7 +33,7 @@ export class Launcher extends React.Component<Props, State> {
                 className={ this.props.className !== undefined ? this.props.className : 'm-1 border-0' }
                 onClick={() => this.store.toggleDialog()}
                 >
-                { this.props.content != undefined ? this.props.content(this.store) : 'Manage cookie consent' }
+                { this.props.content !== undefined ? this.props.content(this.store) : 'Manage cookie consent' }
             </button>
         </>
     }

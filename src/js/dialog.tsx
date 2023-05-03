@@ -17,8 +17,8 @@ export interface Props {
     storeId?: string
     className?: string
     header?: {
-        className: string
-        content: (store: Store) => React.ReactNode
+        className?: string
+        content?: (store: Store) => React.ReactNode
     }
     body?: {
         className?: string

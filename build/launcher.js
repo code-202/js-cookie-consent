@@ -38,7 +38,7 @@ class Launcher extends React.Component {
             return null;
         }
         return React.createElement(React.Fragment, null,
-            React.createElement("button", { className: this.props.className !== undefined ? this.props.className : 'm-1 border-0', onClick: () => this.store.toggleDialog() }, this.props.content != undefined ? this.props.content(this.store) : 'Manage cookie consent'));
+            React.createElement("button", { className: this.props.className !== undefined ? this.props.className : 'm-1 border-0', onClick: () => this.store.toggleDialog() }, this.props.content !== undefined ? this.props.content(this.store) : 'Manage cookie consent'));
     }
 }
 exports.Launcher = Launcher;
