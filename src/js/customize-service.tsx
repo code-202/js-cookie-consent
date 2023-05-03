@@ -4,9 +4,22 @@ import { Store } from './store'
 import { Button } from 'reactstrap'
 import { ConsentResponse, ServiceInformations } from './service'
 
+interface BtnProps {
+    color?: (service: ServiceInformations) => string
+    size?: (service: ServiceInformations) => string
+    outline?: (service: ServiceInformations) => boolean
+    className?: (service: ServiceInformations) => string
+    content?: (service: ServiceInformations) => React.ReactNode
+}
+
 export interface Props {
     store: Store
     service: ServiceInformations
+    className?: (service: ServiceInformations) => string
+    name?: (service: ServiceInformations) => React.ReactNode
+    acceptAll?: BtnProps
+    declineAll?: BtnProps
+    noNeedConsent?: (service: ServiceInformations) => React.ReactNode
 }
 
 export interface State {
@@ -16,60 +29,39 @@ export interface State {
 class CustomizeService extends React.Component<Props, State> {
     render (): React.ReactNode {
 
-        const { store, service } = this.props
+        const { store, service, className, name, acceptAll, declineAll, noNeedConsent } = this.props
 
         return <>
-            <div className="d-flex justify-content-between">
-                { this.renderServiceName() }
+            <div className={className !== undefined ? className(service) : 'd-flex justify-content-between' }>
+                { name !== undefined ? name(service) : <span>{ service.id } ({service.cookies?.join(', ')})</span> }
                 <div>
                     { service.needConsent ? (
                         <>
-                            { this.renderAccept() }
-                            { this.renderDecline() }
+                            <Button
+                                color={acceptAll?.color !== undefined ? acceptAll.color(service) : 'primary'}
+                                size={acceptAll?.size?.(service)}
+                                outline={acceptAll?.outline !== undefined ? acceptAll.outline(service) : service.consent != 'yes'}
+                                className={acceptAll?.className !== undefined ? acceptAll.className(service) : '' }
+                                onClick={() => store.accept(service.id)}
+                                >
+                                {acceptAll?.content !== undefined ? acceptAll.content(service) : 'Accept'}
+                            </Button>
+                            <Button
+                                color={declineAll?.color !== undefined ? declineAll.color(service) : 'primary'}
+                                size={declineAll?.size?.(service)}
+                                outline={declineAll?.outline !== undefined ? declineAll.outline(service) : service.consent != 'no'}
+                                className={declineAll?.className !== undefined ? declineAll.className(service) : 'ms-2' }
+                                onClick={() => store.decline(service.id)}
+                                >
+                                {declineAll?.content !== undefined ? declineAll.content(service) : 'Decline'}
+                            </Button>
                         </>
                     ) : (
-                        this.renderNoNeedConcent()
+                        noNeedConsent !== undefined ? noNeedConsent(service) : 'Required'
                     )}
                 </div>
             </div>
         </>
-    }
-
-    renderServiceName (): React.ReactNode {
-        return <span>{ this.props.service.id } ({this.props.service.cookies?.join(', ')})</span>
-    }
-
-    renderAccept (): React.ReactNode {
-        return <Button
-            color="primary"
-            outline={this.props.service.consent != 'yes'}
-            onClick={() => this.props.store.accept(this.props.service.id)}
-            >
-            { this.renderAcceptContent(this.props.service.consent) }
-        </Button>
-    }
-
-    renderAcceptContent (choice: ConsentResponse ): React.ReactNode {
-        return 'Accept'
-    }
-
-    renderDecline (): React.ReactNode {
-        return <Button
-            color="primary"
-            outline={this.props.service.consent != 'no'}
-            onClick={() => this.props.store.decline(this.props.service.id)}
-            className="ms-2"
-            >
-            { this.renderDeclineContent(this.props.service.consent) }
-        </Button>
-    }
-
-    renderDeclineContent (choice: ConsentResponse ): React.ReactNode {
-        return 'Decline'
-    }
-
-    renderNoNeedConcent(): React.ReactNode {
-        return 'Required'
     }
 }
 

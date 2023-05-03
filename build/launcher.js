@@ -31,17 +31,14 @@ class Launcher extends React.Component {
     store;
     constructor(props) {
         super(props);
-        this.store = (0, kernel_1.getKernel)().container.get('cookie-consent');
+        this.store = (0, kernel_1.getKernel)().container.get(props.storeId !== undefined ? props.storeId : 'cookie-consent');
     }
     render() {
         if (!this.props.alwaysShown && this.store.noCookie !== false) {
             return null;
         }
         return React.createElement(React.Fragment, null,
-            React.createElement("button", { className: this.props.className || 'cookie-consent-btn', onClick: () => this.store.toggleDialog() }, this.renderContent()));
-    }
-    renderContent() {
-        return 'Manage cookie consent';
+            React.createElement("button", { className: this.props.className !== undefined ? this.props.className : 'm-1 border-0', onClick: () => this.store.toggleDialog() }, this.props.content != undefined ? this.props.content(this.store) : 'Manage cookie consent'));
     }
 }
 exports.Launcher = Launcher;

@@ -3,10 +3,39 @@ import { observer } from 'mobx-react'
 import { Store } from './store'
 import { Button, Collapse, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
 import { getKernel } from '@code-202/kernel'
-import Customize from './customize'
+import Customize, { Props as CustomizeProps } from './customize'
+
+interface BtnProps {
+    color?: string
+    size?: string
+    outline?: boolean
+    className?: string
+    content?: (store: Store) => React.ReactNode
+}
 
 export interface Props {
-
+    storeId?: string
+    className?: string
+    header?: {
+        className: string
+        content: (store: Store) => React.ReactNode
+    }
+    body?: {
+        className?: string
+        content?: (store: Store, customize: React.ReactNode) => React.ReactNode
+    }
+    footer?: {
+        className?: string
+        collapse?: {
+            className?: string
+            contentClassName?: string
+        }
+        acceptAll?: BtnProps
+        declineAll?: BtnProps
+        customize?: BtnProps
+        close?: BtnProps
+    }
+    customize?: CustomizeProps
 }
 
 export interface State {
@@ -19,71 +48,75 @@ class Dialog extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
 
-        this.store = getKernel().container.get('cookie-consent') as Store
+        this.store = getKernel().container.get(props.storeId !== undefined ? props.storeId : 'cookie-consent') as Store
     }
 
     render (): React.ReactNode {
+        const { className, header, body, footer } = this.props
+
+        const customize = <Customize {...this.props.customize}/>
 
         return <>
-            <Modal isOpen={this.store.dialogIsOpened} centered toggle={this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined} className="cookie-consent-dialog">
-                <ModalHeader className="cookie-consent-dialog-body" toggle={this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined}>
-                    { this.renderModalHeader() }
+            <Modal isOpen={this.store.dialogIsOpened} centered toggle={this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined} className={className}>
+                <ModalHeader className={header?.className} toggle={this.store.noCookie !== true ? () => this.store.toggleDialog() : undefined}>
+                    {header?.content !== undefined ? header.content(this.store) : (
+                        this.store.newServiceSinceLastConsent ? 'New cookie from last consent !' : 'Cookie Consent ?'
+                    )}
                 </ModalHeader>
-                <ModalBody className="cookie-consent-dialog-body">
-                    { this.renderModalBody() }
+                <ModalBody className={body?.className}>
+                    {body?.content !== undefined ? body.content(this.store, customize) : (
+                        !this.store.customizing ? null : customize
+                    )}
                 </ModalBody>
-                <ModalFooter className="cookie-consent-dialog-footer">
-                    <Collapse isOpen={!this.store.customizing} className="w-100">
-                        <div className="d-flex justify-content-between">
-                            <button onClick={this.onAcceptClickHandler} className="cookie-consent-dialog-btn-accept">
-                                { this.renderButtonAcceptAll() }
-                            </button>
-                            <button onClick={this.onDeclineClickHandler} className="cookie-consent-dialog-btn-decline">
-                                { this.renderButtonDeclineAll() }
-                            </button>
+                <ModalFooter className={footer?.className}>
+                    <Collapse isOpen={!this.store.customizing} className={footer?.collapse?.className !== undefined ? footer.collapse.className : 'w-100'}>
+                        <div className={footer?.collapse !== undefined ? footer.collapse.contentClassName : 'd-flex justify-content-between align-items-center'}>
+                            <Button
+                                color={footer?.acceptAll?.color !== undefined ? footer.acceptAll.color : 'primary'}
+                                size={footer?.acceptAll?.size}
+                                outline={footer?.acceptAll?.outline !== undefined ? footer.acceptAll.outline : false}
+                                className={footer?.acceptAll?.className !== undefined ? footer.acceptAll.className : '' }
+                                onClick={this.onAcceptClickHandler}
+                                >
+                                {footer?.acceptAll?.content !== undefined ? footer.acceptAll.content(this.store) : 'Accept all'}
+                            </Button>
+                            <Button
+                                color={footer?.declineAll?.color !== undefined ? footer.declineAll.color : 'dark'}
+                                size={footer?.declineAll?.size}
+                                outline={footer?.declineAll?.outline !== undefined ? footer.declineAll.outline : true}
+                                className={footer?.declineAll?.className !== undefined ? footer.declineAll.className : '' }
+                                onClick={this.onDeclineClickHandler}
+                                >
+                                {footer?.declineAll?.content !== undefined ? footer.declineAll.content(this.store) : 'Decline all'}
+                            </Button>
                             { this.store.isCustomizable && (
-                                <button onClick={this.onCustomizeClickHandler}  className="cookie-consent-dialog-btn-customize">
-                                    { this.renderButtonCustomize() }
-                                </button>
+                                <Button
+                                    color={footer?.customize?.color !== undefined ? footer.customize.color : 'secondary'}
+                                    size={footer?.customize?.size}
+                                    outline={footer?.customize?.outline !== undefined ? footer.customize.outline : false}
+                                    className={footer?.customize?.className !== undefined ? footer.customize.className : '' }
+
+                                    onClick={this.onCustomizeClickHandler}
+                                    >
+                                    {footer?.customize?.content !== undefined ? footer.customize.content(this.store) : 'Customize'}
+                                </Button>
                             )}
                         </div>
                     </Collapse>
                     <Collapse isOpen={this.store.customizing}>
-                        <button onClick={this.onCloseClickHandler}  className="cookie-consent-dialog-btn-close">
-                            { this.renderButtonClose() }
-                        </button>
+                        <Button
+                            color={footer?.close?.color !== undefined ? footer.close.color : 'secondary'}
+                            size={footer?.close?.size}
+                            outline={footer?.close?.outline !== undefined ? footer.close.outline : false}
+                            className={footer?.close?.className !== undefined ? footer.close.className : '' }
+                            onClick={this.onCloseClickHandler}
+                            >
+                            {footer?.close?.content !== undefined ? footer.close.content(this.store) : 'Close'}
+                        </Button>
                     </Collapse>
                 </ModalFooter>
             </Modal>
         </>
-    }
-
-    renderModalHeader (): React.ReactNode {
-        return this.store.newServiceSinceLastConsent ? 'New cookie from last consent !' : 'Cookie Consent ?'
-    }
-
-    renderModalBody (): React.ReactNode {
-        if (!this.store.customizing) {
-            return null
-        }
-
-        return <Customize />
-    }
-
-    renderButtonAcceptAll (): React.ReactNode {
-        return 'Accept all'
-    }
-
-    renderButtonDeclineAll (): React.ReactNode {
-        return 'Decline all'
-    }
-
-    renderButtonCustomize (): React.ReactNode {
-        return 'Customize'
-    }
-
-    renderButtonClose (): React.ReactNode {
-        return 'Close'
     }
 
     protected onDeclineClickHandler = (): void => {

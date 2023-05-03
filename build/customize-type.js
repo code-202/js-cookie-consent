@@ -32,44 +32,17 @@ const reactstrap_1 = require("reactstrap");
 const customize_service_1 = __importDefault(require("./customize-service"));
 class CustomizeType extends React.Component {
     render() {
-        const { store, type } = this.props;
+        const { store, type, className, name, acceptAll, declineAll, noNeedConsent } = this.props;
         return React.createElement(React.Fragment, null,
-            React.createElement("div", { className: "d-flex justify-content-between border-top py-2" },
-                this.renderTypeName(),
+            React.createElement("div", { className: className !== undefined ? className(type) : 'd-flex justify-content-between align-items-center border-top py-2' },
+                React.createElement("div", null,
+                    React.createElement(reactstrap_1.Button, { color: name?.btn?.color !== undefined ? name.btn.color(type) : 'primary', size: name?.btn?.size?.(type), outline: name?.btn?.outline !== undefined ? name.btn.outline(type) : type.expanded, className: name?.btn?.className !== undefined ? name.btn.className(type) : 'me-2', onClick: () => store.toggleType(type.id) }, name?.btn?.content !== undefined ? name.btn.content(type) : '+'),
+                    name?.content !== undefined ? name.content(type) : type.id),
                 React.createElement("div", null, type.needConsent ? (React.createElement(React.Fragment, null,
-                    this.renderAcceptAll(),
-                    this.renderDeclineAll())) : (this.renderNoNeedConcent()))),
+                    React.createElement(reactstrap_1.Button, { color: acceptAll?.color !== undefined ? acceptAll.color(type) : 'primary', size: acceptAll?.size?.(type), outline: acceptAll?.outline !== undefined ? acceptAll.outline(type) : type.choice != 'yes', className: acceptAll?.className !== undefined ? acceptAll.className(type) : '', onClick: () => store.acceptType(type.id) }, acceptAll?.content !== undefined ? acceptAll.content(type) : 'Accept all'),
+                    React.createElement(reactstrap_1.Button, { color: declineAll?.color !== undefined ? declineAll.color(type) : 'primary', size: declineAll?.size?.(type), outline: declineAll?.outline !== undefined ? declineAll.outline(type) : type.choice != 'no', className: declineAll?.className !== undefined ? declineAll.className(type) : 'ms-2', onClick: () => store.declineType(type.id) }, declineAll?.content !== undefined ? declineAll.content(type) : 'Decline all'))) : (noNeedConsent !== undefined ? noNeedConsent(type) : 'Required'))),
             React.createElement(reactstrap_1.Collapse, { isOpen: type.expanded },
-                React.createElement(reactstrap_1.ListGroup, { flush: true }, type.services.map((service) => this.renderService(service)))));
-    }
-    renderTypeName() {
-        return React.createElement("div", null,
-            React.createElement(reactstrap_1.Button, { color: "primary", size: "sm", outline: this.props.type.expanded, onClick: () => this.props.store.toggleType(this.props.type.id), className: "me-2" }, this.renderToggleTypeContent()),
-            this.renderTypeNameContent());
-    }
-    renderTypeNameContent() {
-        return React.createElement("span", null, this.props.type.id);
-    }
-    renderToggleTypeContent() {
-        return '+';
-    }
-    renderAcceptAll() {
-        return React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.type.choice != 'yes', onClick: () => this.props.store.acceptType(this.props.type.id) }, this.renderAcceptAllContent(this.props.type.choice));
-    }
-    renderAcceptAllContent(choice) {
-        return 'Accept all';
-    }
-    renderDeclineAll() {
-        return React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.type.choice != 'no', onClick: () => this.props.store.declineType(this.props.type.id), className: "ms-2" }, this.renderDeclineAllContent(this.props.type.choice));
-    }
-    renderDeclineAllContent(choice) {
-        return 'Decline all';
-    }
-    renderService(service) {
-        return React.createElement(customize_service_1.default, { key: service.id, service: service, store: this.props.store });
-    }
-    renderNoNeedConcent() {
-        return 'Required';
+                React.createElement(reactstrap_1.ListGroup, { flush: true }, type.services.map((service) => (React.createElement(customize_service_1.default, { ...this.props.service, key: service.id, service: service, store: store }))))));
     }
 }
 exports.default = (0, mobx_react_1.observer)(CustomizeType);

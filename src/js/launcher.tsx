@@ -4,7 +4,9 @@ import { Store } from './store'
 import { getKernel } from '@code-202/kernel'
 
 export interface Props {
+    storeId?: string
     className?: string
+    content?: (store: Store) => React.ReactNode
     alwaysShown?: boolean
 }
 
@@ -18,7 +20,7 @@ export class Launcher extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
 
-        this.store = getKernel().container.get('cookie-consent') as Store
+        this.store = getKernel().container.get(props.storeId !== undefined ? props.storeId : 'cookie-consent') as Store
     }
 
     render (): React.ReactNode {
@@ -28,16 +30,12 @@ export class Launcher extends React.Component<Props, State> {
 
         return <>
             <button
-                className={ this.props.className || 'cookie-consent-btn' }
+                className={ this.props.className !== undefined ? this.props.className : 'm-1 border-0' }
                 onClick={() => this.store.toggleDialog()}
                 >
-                { this.renderContent() }
+                { this.props.content != undefined ? this.props.content(this.store) : 'Manage cookie consent' }
             </button>
         </>
-    }
-
-    renderContent (): React.ReactNode {
-        return 'Manage cookie consent'
     }
 }
 

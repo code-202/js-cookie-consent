@@ -2,10 +2,10 @@ import * as React from 'react'
 import { observer } from 'mobx-react'
 import { Store, TypeOptions } from './store'
 import { getKernel } from '@code-202/kernel'
-import CustomizeType from './customize-type'
+import CustomizeType, { Props as CustomizeTypeProps } from './customize-type'
 
 export interface Props {
-
+    type?: Omit<CustomizeTypeProps, 'type' | 'store'>
 }
 
 export interface State {
@@ -26,12 +26,10 @@ class Customize extends React.Component<Props, State> {
         const types = this.store.types
 
         return <>
-            { types.map((type: TypeOptions) => this.renderType(type)) }
+            { types.map((type: TypeOptions) => (
+                <CustomizeType {...this.props.type} key={type.id} type={type} store={this.store} />
+            )) }
         </>
-    }
-
-    renderType (type: TypeOptions): React.ReactNode {
-        return <CustomizeType key={type.id} type={type} store={this.store} />
     }
 }
 

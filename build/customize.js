@@ -38,10 +38,7 @@ class Customize extends React.Component {
     }
     render() {
         const types = this.store.types;
-        return React.createElement(React.Fragment, null, types.map((type) => this.renderType(type)));
-    }
-    renderType(type) {
-        return React.createElement(customize_type_1.default, { key: type.id, type: type, store: this.store });
+        return React.createElement(React.Fragment, null, types.map((type) => (React.createElement(customize_type_1.default, { ...this.props.type, key: type.id, type: type, store: this.store }))));
     }
 }
 exports.default = (0, mobx_react_1.observer)(Customize);

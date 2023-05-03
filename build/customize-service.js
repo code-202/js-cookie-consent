@@ -28,35 +28,17 @@ const mobx_react_1 = require("mobx-react");
 const reactstrap_1 = require("reactstrap");
 class CustomizeService extends React.Component {
     render() {
-        const { store, service } = this.props;
+        const { store, service, className, name, acceptAll, declineAll, noNeedConsent } = this.props;
         return React.createElement(React.Fragment, null,
-            React.createElement("div", { className: "d-flex justify-content-between" },
-                this.renderServiceName(),
+            React.createElement("div", { className: className !== undefined ? className(service) : 'd-flex justify-content-between' },
+                name !== undefined ? name(service) : React.createElement("span", null,
+                    service.id,
+                    " (",
+                    service.cookies?.join(', '),
+                    ")"),
                 React.createElement("div", null, service.needConsent ? (React.createElement(React.Fragment, null,
-                    this.renderAccept(),
-                    this.renderDecline())) : (this.renderNoNeedConcent()))));
-    }
-    renderServiceName() {
-        return React.createElement("span", null,
-            this.props.service.id,
-            " (",
-            this.props.service.cookies?.join(', '),
-            ")");
-    }
-    renderAccept() {
-        return React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.service.consent != 'yes', onClick: () => this.props.store.accept(this.props.service.id) }, this.renderAcceptContent(this.props.service.consent));
-    }
-    renderAcceptContent(choice) {
-        return 'Accept';
-    }
-    renderDecline() {
-        return React.createElement(reactstrap_1.Button, { color: "primary", outline: this.props.service.consent != 'no', onClick: () => this.props.store.decline(this.props.service.id), className: "ms-2" }, this.renderDeclineContent(this.props.service.consent));
-    }
-    renderDeclineContent(choice) {
-        return 'Decline';
-    }
-    renderNoNeedConcent() {
-        return 'Required';
+                    React.createElement(reactstrap_1.Button, { color: acceptAll?.color !== undefined ? acceptAll.color(service) : 'primary', size: acceptAll?.size?.(service), outline: acceptAll?.outline !== undefined ? acceptAll.outline(service) : service.consent != 'yes', className: acceptAll?.className !== undefined ? acceptAll.className(service) : '', onClick: () => store.accept(service.id) }, acceptAll?.content !== undefined ? acceptAll.content(service) : 'Accept'),
+                    React.createElement(reactstrap_1.Button, { color: declineAll?.color !== undefined ? declineAll.color(service) : 'primary', size: declineAll?.size?.(service), outline: declineAll?.outline !== undefined ? declineAll.outline(service) : service.consent != 'no', className: declineAll?.className !== undefined ? declineAll.className(service) : 'ms-2', onClick: () => store.decline(service.id) }, declineAll?.content !== undefined ? declineAll.content(service) : 'Decline'))) : (noNeedConsent !== undefined ? noNeedConsent(service) : 'Required'))));
     }
 }
 exports.default = (0, mobx_react_1.observer)(CustomizeService);
