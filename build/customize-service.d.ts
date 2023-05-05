@@ -13,8 +13,8 @@ export interface Props {
     service: ServiceInformations;
     className?: (service: ServiceInformations) => string;
     name?: (service: ServiceInformations) => React.ReactNode;
-    acceptAll?: BtnProps;
-    declineAll?: BtnProps;
+    accept?: BtnProps;
+    decline?: BtnProps;
     noNeedConsent?: (service: ServiceInformations) => React.ReactNode;
 }
 export interface State {

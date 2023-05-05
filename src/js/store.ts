@@ -337,6 +337,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
 
         action(() => {
             this.noCookie = false
+            this.newServiceSinceLastConsent = this.nbNeedConcentServices > 0
         })()
     }
 

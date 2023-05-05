@@ -17,8 +17,8 @@ export interface Props {
     service: ServiceInformations
     className?: (service: ServiceInformations) => string
     name?: (service: ServiceInformations) => React.ReactNode
-    acceptAll?: BtnProps
-    declineAll?: BtnProps
+    accept?: BtnProps
+    decline?: BtnProps
     noNeedConsent?: (service: ServiceInformations) => React.ReactNode
 }
 
@@ -29,7 +29,7 @@ export interface State {
 class CustomizeService extends React.Component<Props, State> {
     render (): React.ReactNode {
 
-        const { store, service, className, name, acceptAll, declineAll, noNeedConsent } = this.props
+        const { store, service, className, name, accept, decline, noNeedConsent } = this.props
 
         return <>
             <div className={className !== undefined ? className(service) : 'd-flex justify-content-between' }>
@@ -38,22 +38,22 @@ class CustomizeService extends React.Component<Props, State> {
                     { service.needConsent ? (
                         <>
                             <Button
-                                color={acceptAll?.color !== undefined ? acceptAll.color(service) : 'primary'}
-                                size={acceptAll?.size?.(service)}
-                                outline={acceptAll?.outline !== undefined ? acceptAll.outline(service) : service.consent != 'yes'}
-                                className={acceptAll?.className !== undefined ? acceptAll.className(service) : '' }
+                                color={accept?.color !== undefined ? accept.color(service) : 'primary'}
+                                size={accept?.size?.(service)}
+                                outline={accept?.outline !== undefined ? accept.outline(service) : service.consent != 'yes'}
+                                className={accept?.className !== undefined ? accept.className(service) : '' }
                                 onClick={() => store.accept(service.id)}
                                 >
-                                {acceptAll?.content !== undefined ? acceptAll.content(service) : 'Accept'}
+                                {accept?.content !== undefined ? accept.content(service) : 'Accept'}
                             </Button>
                             <Button
-                                color={declineAll?.color !== undefined ? declineAll.color(service) : 'primary'}
-                                size={declineAll?.size?.(service)}
-                                outline={declineAll?.outline !== undefined ? declineAll.outline(service) : service.consent != 'no'}
-                                className={declineAll?.className !== undefined ? declineAll.className(service) : 'ms-2' }
+                                color={decline?.color !== undefined ? decline.color(service) : 'primary'}
+                                size={decline?.size?.(service)}
+                                outline={decline?.outline !== undefined ? decline.outline(service) : service.consent != 'no'}
+                                className={decline?.className !== undefined ? decline.className(service) : 'ms-2' }
                                 onClick={() => store.decline(service.id)}
                                 >
-                                {declineAll?.content !== undefined ? declineAll.content(service) : 'Decline'}
+                                {decline?.content !== undefined ? decline.content(service) : 'Decline'}
                             </Button>
                         </>
                     ) : (

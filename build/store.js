@@ -248,6 +248,7 @@ class Store {
         this._cookies.set(this._options.cookie.name, this.consents.join('|') + '!' + this.unconsents.join('|'), options);
         (0, mobx_1.action)(() => {
             this.noCookie = false;
+            this.newServiceSinceLastConsent = this.nbNeedConcentServices > 0;
         })();
     }
     normalize() {
