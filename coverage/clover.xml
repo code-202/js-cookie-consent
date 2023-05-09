@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1683666643415" clover="3.2.0">
-  <project timestamp="1683666643415" name="All files">
+<coverage generated="1683667304052" clover="3.2.0">
+  <project timestamp="1683667304052" name="All files">
     <metrics statements="251" coveredstatements="213" conditionals="173" coveredconditionals="54" methods="71" coveredmethods="47" elements="495" coveredelements="314" complexity="0" loc="251" ncloc="251" packages="1" files="9" classes="9"/>
     <file name="cookies-manager.ts" path="/srv/src/js/cookies-manager.ts">
       <metrics statements="20" coveredstatements="20" conditionals="5" coveredconditionals="5" methods="4" coveredmethods="4"/>

@@ -26,7 +26,7 @@ class CookiesManagerWrapper {
         if (this.cookies.indexOf(name) < 0) {
             throw new AccessDeniedError('access denied');
         }
-        this.cookiesManager.get(name, options);
+        return this.cookiesManager.get(name, options);
     }
     remove(name, options) {
         if (this.cookies.indexOf(name) < 0) {

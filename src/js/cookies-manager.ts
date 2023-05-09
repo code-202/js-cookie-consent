@@ -33,7 +33,7 @@ export class CookiesManagerWrapper implements CookiesManager
             throw new AccessDeniedError('access denied')
         }
 
-        this.cookiesManager.get(name, options)
+        return this.cookiesManager.get(name, options)
     }
 
     public remove (name: string, options?: CookieSetOptions): void {

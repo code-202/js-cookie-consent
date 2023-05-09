@@ -4,7 +4,7 @@ import { fn } from 'jest-mock'
 import { Cookie, CookieGetOptions, CookieSetOptions } from 'universal-cookie'
 
 test('getters', () => {
-    expect.assertions(27)
+    expect.assertions(28)
 
     const mockGet = fn(res => res)
     const mockSet = fn(res => res)
@@ -23,7 +23,7 @@ test('getters', () => {
 
     const cmw = new CookiesManagerWrapper(cm, ['_foo', '_bar'], () => enable)
 
-    cmw.get('_foo')
+    expect(cmw.get('_foo')).toBe('_foo')
     expect(mockGet.mock.calls).toHaveLength(1)
     expect(mockGet.mock.results[0].value).toBe('_foo')
 
