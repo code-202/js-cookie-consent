@@ -1,6 +1,6 @@
 {
   "name": "@code-202/cookie-consent",
-  "version": "3.0.3",
+  "version": "4.0.0",
   "description": "Rich cookie consent with react/mobx and bootstrap design",
   "main": "build/index.js",
   "repository": "git@github.com:code-202/js-cookie-consent.git",

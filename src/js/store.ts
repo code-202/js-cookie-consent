@@ -178,7 +178,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
             return false
         }
 
-        const service = new Service(options)
+        const service = new Service(options, this._cookies)
 
         if (this.globalConsent == 'yes' || !service.needConsent) {
             service.accept()

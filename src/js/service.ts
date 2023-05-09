@@ -1,15 +1,16 @@
 import { makeObservable, observable, action } from 'mobx'
+import { CookiesManager, CookiesManagerWrapper } from './cookies-manager'
 
 export interface ServiceDefinition {
     id: string
     needConsent: boolean
     type?: string
     name?: string
-    cookies?: string[]
+    cookies: string[]
 }
 
 export interface ServiceOptions extends ServiceDefinition {
-    onAccept?: () => void
+    onAccept?: (manager: CookiesManagerWrapper) => void
     onDecline?: () => void
 }
 
@@ -22,8 +23,9 @@ export type ConsentResponse = 'yes' | 'no' | 'unknown'
 export class Service implements ServiceInformations {
     public consent: ConsentResponse = 'unknown'
     protected _options: ServiceOptions
+    protected _cookies: CookiesManager
 
-    constructor(options: ServiceOptions) {
+    constructor(options: ServiceOptions, cookies: CookiesManager) {
         makeObservable(this, {
             consent: observable,
 
@@ -32,6 +34,7 @@ export class Service implements ServiceInformations {
         })
 
         this._options = options
+        this._cookies = cookies
     }
 
     public get id (): string {
@@ -51,7 +54,7 @@ export class Service implements ServiceInformations {
     }
 
     public get cookies (): string[] {
-        return this._options.cookies ? this._options.cookies : []
+        return this._options.cookies
     }
 
     public get definition (): ServiceDefinition {
@@ -64,7 +67,7 @@ export class Service implements ServiceInformations {
         }
     }
 
-    public accept(): void {
+    public accept (): void {
         if (this.consent == 'yes') {
             return
         }
@@ -72,11 +75,11 @@ export class Service implements ServiceInformations {
         this.consent = 'yes'
 
         if (this._options.onAccept) {
-            this._options.onAccept()
+            this._options.onAccept(new CookiesManagerWrapper(this._cookies, this.definition.cookies))
         }
     }
 
-    public decline(): void {
+    public decline (): void {
         if (this.consent == 'no') {
             return
         }
@@ -85,6 +88,10 @@ export class Service implements ServiceInformations {
 
         if (this._options.onDecline) {
             this._options.onDecline()
+        }
+
+        for (const cookie of this.definition.cookies) {
+            this._cookies.remove(cookie)
         }
     }
 }

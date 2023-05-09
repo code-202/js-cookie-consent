@@ -2,16 +2,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Service = void 0;
 const mobx_1 = require("mobx");
+const cookies_manager_1 = require("./cookies-manager");
 class Service {
     consent = 'unknown';
     _options;
-    constructor(options) {
+    _cookies;
+    constructor(options, cookies) {
         (0, mobx_1.makeObservable)(this, {
             consent: mobx_1.observable,
             accept: mobx_1.action,
             decline: mobx_1.action,
         });
         this._options = options;
+        this._cookies = cookies;
     }
     get id() {
         return this._options.id;
@@ -26,7 +29,7 @@ class Service {
         return this._options.name !== undefined ? this._options.name : this.type + '.' + this.id;
     }
     get cookies() {
-        return this._options.cookies ? this._options.cookies : [];
+        return this._options.cookies;
     }
     get definition() {
         return {
@@ -43,7 +46,7 @@ class Service {
         }
         this.consent = 'yes';
         if (this._options.onAccept) {
-            this._options.onAccept();
+            this._options.onAccept(new cookies_manager_1.CookiesManagerWrapper(this._cookies, this.definition.cookies));
         }
     }
     decline() {
@@ -53,6 +56,9 @@ class Service {
         this.consent = 'no';
         if (this._options.onDecline) {
             this._options.onDecline();
+        }
+        for (const cookie of this.definition.cookies) {
+            this._cookies.remove(cookie);
         }
     }
 }

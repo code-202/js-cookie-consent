@@ -1,6 +1,13 @@
 import { test, expect } from '@jest/globals'
-import { Service } from '../src/js'
+import { Service, CookiesManager } from '../src/js'
 import { fn } from 'jest-mock'
+import { Cookie, CookieGetOptions, CookieSetOptions } from 'universal-cookie'
+
+const cm: CookiesManager  = {
+    get(name: string, options?: CookieGetOptions): any { return name },
+    set(name: string, value: Cookie, options?: CookieSetOptions): void {},
+    remove(name: string, options?: CookieSetOptions): void {},
+}
 
 test('getters', () => {
     expect.assertions(14)
@@ -18,7 +25,7 @@ test('getters', () => {
             console.log('disable Foo')
             //ga.disable()
         }
-    })
+    }, cm)
 
     const service2 = new Service({
         id: 'foo',
@@ -34,11 +41,12 @@ test('getters', () => {
             console.log('disable Foo')
             //ga.disable()
         }
-    })
+    }, cm)
 
     const service3 = new Service({
         id: 'foo',
         needConsent: true,
+        cookies: [],
         onAccept: () => {
             console.log('enable Foo')
             //ga.enable()
@@ -47,7 +55,7 @@ test('getters', () => {
             console.log('disable Foo')
             //ga.disable()
         }
-    })
+    }, cm)
 
     expect(service.id).toBe('foo')
     expect(service.needConsent).toBe(false)
@@ -61,7 +69,6 @@ test('getters', () => {
         name: 'bar.foo',
         cookies: ['_foo', '_bar'],
     })
-
 
     expect(service2.id).toBe('foo')
     expect(service2.needConsent).toBe(true)
@@ -96,7 +103,7 @@ test('callbacks', () => {
         onDecline: () => {
             callback('disable')
         }
-    })
+    }, cm)
 
     expect(service.consent).toBe('unknown')
 

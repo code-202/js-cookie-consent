@@ -5,25 +5,30 @@ import { Launcher, Props as LaucherProps } from './launcher'
 import Customize, { Props as CustomizeProps } from './customize'
 import CustomizeType, { Props as CustomizeTypeProps } from './customize-type'
 import CustomizeService, { Props as CustomizeServiceProps } from './customize-service'
+import { CookiesManager, CookiesManagerWrapper, AccessDeniedError, CookieError } from './cookies-manager'
 
 export {
+    AccessDeniedError,
+    ConsentResponse,
+    CookieError,
+    CookiesManager,
+    CookiesManagerWrapper,
     Customize,
     CustomizeProps,
-    CustomizeType,
-    CustomizeTypeProps,
     CustomizeService,
     CustomizeServiceProps,
+    CustomizeType,
+    CustomizeTypeProps,
     Dialog,
     DialogProps,
-    Launcher,
     LaucherProps,
-    Store,
-    StoreOptions,
+    Launcher,
     PartialStoreOptions,
+    Service,
     ServiceDefinition,
     ServiceInformations,
     ServiceOptions,
-    Service,
+    Store,
+    StoreOptions,
     TypeOptions,
-    ConsentResponse
 }

@@ -126,7 +126,7 @@ class Store {
         if (already) {
             return false;
         }
-        const service = new service_1.Service(options);
+        const service = new service_1.Service(options, this._cookies);
         if (this.globalConsent == 'yes' || !service.needConsent) {
             service.accept();
         }
