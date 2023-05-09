@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Store = exports.Service = exports.Launcher = exports.Dialog = exports.CustomizeType = exports.CustomizeService = exports.Customize = exports.CookiesManagerWrapper = exports.CookieError = exports.AccessDeniedError = void 0;
+exports.Store = exports.Service = exports.Launcher = exports.DisabledError = exports.Dialog = exports.CustomizeType = exports.CustomizeService = exports.Customize = exports.CookiesManagerWrapper = exports.CookieError = exports.AccessDeniedError = void 0;
 const store_1 = require("./store");
 Object.defineProperty(exports, "Store", { enumerable: true, get: function () { return store_1.Store; } });
 const service_1 = require("./service");
@@ -22,3 +22,4 @@ const cookies_manager_1 = require("./cookies-manager");
 Object.defineProperty(exports, "CookiesManagerWrapper", { enumerable: true, get: function () { return cookies_manager_1.CookiesManagerWrapper; } });
 Object.defineProperty(exports, "AccessDeniedError", { enumerable: true, get: function () { return cookies_manager_1.AccessDeniedError; } });
 Object.defineProperty(exports, "CookieError", { enumerable: true, get: function () { return cookies_manager_1.CookieError; } });
+Object.defineProperty(exports, "DisabledError", { enumerable: true, get: function () { return cookies_manager_1.DisabledError; } });

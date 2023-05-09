@@ -46,7 +46,7 @@ class Service {
         }
         this.consent = 'yes';
         if (this._options.onAccept) {
-            this._options.onAccept(new cookies_manager_1.CookiesManagerWrapper(this._cookies, this.definition.cookies));
+            this._options.onAccept(new cookies_manager_1.CookiesManagerWrapper(this._cookies, this.definition.cookies, () => this.consent === 'yes'));
         }
     }
     decline() {

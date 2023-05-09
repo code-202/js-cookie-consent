@@ -75,7 +75,7 @@ export class Service implements ServiceInformations {
         this.consent = 'yes'
 
         if (this._options.onAccept) {
-            this._options.onAccept(new CookiesManagerWrapper(this._cookies, this.definition.cookies))
+            this._options.onAccept(new CookiesManagerWrapper(this._cookies, this.definition.cookies, () => this.consent === 'yes'))
         }
     }
 
