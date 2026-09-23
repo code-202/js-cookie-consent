@@ -19,3 +19,4 @@ export interface CookiesManager {
     set(name: string, value: Cookie, options?: CookieSetOptions): void;
     remove(name: string, options?: CookieSetOptions): void;
 }
+//# sourceMappingURL=cookies-manager.d.ts.map

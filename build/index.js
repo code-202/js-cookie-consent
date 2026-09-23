@@ -23,3 +23,4 @@ Object.defineProperty(exports, "CookiesManagerWrapper", { enumerable: true, get:
 Object.defineProperty(exports, "AccessDeniedError", { enumerable: true, get: function () { return cookies_manager_1.AccessDeniedError; } });
 Object.defineProperty(exports, "CookieError", { enumerable: true, get: function () { return cookies_manager_1.CookieError; } });
 Object.defineProperty(exports, "DisabledError", { enumerable: true, get: function () { return cookies_manager_1.DisabledError; } });
+//# sourceMappingURL=index.js.map

@@ -45,3 +45,4 @@ declare class Dialog extends React.Component<Props, State> {
 }
 declare const _default: typeof Dialog;
 export default _default;
+//# sourceMappingURL=dialog.d.ts.map

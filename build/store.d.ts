@@ -68,3 +68,4 @@ export interface StoreNormalized {
     noCookie: boolean | undefined;
     dialogIsOpened: boolean;
 }
+//# sourceMappingURL=store.d.ts.map

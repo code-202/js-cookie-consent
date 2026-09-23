@@ -15,3 +15,4 @@ export declare class Launcher extends React.Component<Props, State> {
 }
 declare const _default: typeof Launcher;
 export default _default;
+//# sourceMappingURL=launcher.d.ts.map

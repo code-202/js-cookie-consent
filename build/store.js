@@ -266,3 +266,4 @@ class Store {
     }
 }
 exports.Store = Store;
+//# sourceMappingURL=store.js.map

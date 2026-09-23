@@ -45,3 +45,4 @@ exports.AccessDeniedError = AccessDeniedError;
 class DisabledError extends CookieError {
 }
 exports.DisabledError = DisabledError;
+//# sourceMappingURL=cookies-manager.js.map

@@ -6,4 +6,5 @@ import Customize, { Props as CustomizeProps } from './customize';
 import CustomizeType, { Props as CustomizeTypeProps } from './customize-type';
 import CustomizeService, { Props as CustomizeServiceProps } from './customize-service';
 import { CookiesManager, CookiesManagerWrapper, AccessDeniedError, CookieError, DisabledError } from './cookies-manager';
-export { AccessDeniedError, ConsentResponse, CookieError, CookiesManager, CookiesManagerWrapper, Customize, CustomizeProps, CustomizeService, CustomizeServiceProps, CustomizeType, CustomizeTypeProps, Dialog, DialogProps, DisabledError, LaucherProps, Launcher, PartialStoreOptions, Service, ServiceDefinition, ServiceInformations, ServiceOptions, Store, StoreOptions, TypeOptions, };
+export { AccessDeniedError, type ConsentResponse, CookieError, type CookiesManager, CookiesManagerWrapper, Customize, type CustomizeProps, CustomizeService, type CustomizeServiceProps, CustomizeType, type CustomizeTypeProps, Dialog, type DialogProps, DisabledError, type LaucherProps, Launcher, type PartialStoreOptions, Service, type ServiceDefinition, type ServiceInformations, type ServiceOptions, Store, type StoreOptions, type TypeOptions, };
+//# sourceMappingURL=index.d.ts.map

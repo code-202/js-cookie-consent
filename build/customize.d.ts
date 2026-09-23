@@ -13,3 +13,4 @@ declare class Customize extends React.Component<Props, State> {
 }
 declare const _default: typeof Customize;
 export default _default;
+//# sourceMappingURL=customize.d.ts.map

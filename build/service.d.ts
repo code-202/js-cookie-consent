@@ -28,3 +28,4 @@ export declare class Service implements ServiceInformations {
     accept(): void;
     decline(): void;
 }
+//# sourceMappingURL=service.d.ts.map
