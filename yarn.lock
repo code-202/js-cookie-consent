@@ -293,10 +293,10 @@
     hashery "^1.5.1"
     keyv "^5.6.0"
 
-"@code-202/kernel@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@code-202/kernel/-/kernel-2.0.0.tgz#b06d438b2a3a8b06f242aa0e5ea2efb0f5ea7dd0"
-  integrity sha512-zx9AdXp0BYHBV6QP+6k5KnSVnSO6OGZKF+wPFfq0kS8z//x6tV/SZ446KP9qp2V/R/KYhZ1UGRvCj9sFeyfMMA==
+"@code-202/kernel@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/@code-202/kernel/-/kernel-2.1.0.tgz#7def3b3f3869c3ac3c884c5312816b10b058ec75"
+  integrity sha512-1s3uKnWDjMUpIA0b+WH7btgDhidmyySTQXNZbNK7sv2g6zqu4OrMWQjuReiVM4obDTnxHpHS6jChUqKn9AKk5Q==
   dependencies:
     "@code-202/serializer" "^1.0.0"
     lodash.has "^4.5.2"
@@ -305,6 +305,11 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@code-202/serializer/-/serializer-1.0.0.tgz#782f06ead1225bf2243f72acafd6772bd543eb72"
   integrity sha512-Wi3qN4oSg3dOuW18GWuMcxeo+OZBXS0h7GZqiivkZZD5+5T1JPBWq+dIqo+pDBIcz+HYIx7lniKCGXktgl+/Tg==
+
+"@code-202/serializer@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@code-202/serializer/-/serializer-1.1.0.tgz#0ef57e658973c0fcaa522d1118381d82159d40da"
+  integrity sha512-oQePdV0koBauIX62STDlZkyk/Z6s/n0X1JB3XGL3R7UYyfSbM0fdPfHlwGbBwFVoX6+XU6Ag8Evab6Y2KDdDxA==
 
 "@cspotcode/source-map-support@^0.8.0":
   version "0.8.1"

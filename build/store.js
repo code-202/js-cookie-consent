@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Store = void 0;
 const mobx_1 = require("mobx");
 const universal_cookie_1 = __importDefault(require("universal-cookie"));
-const lodash_1 = require("lodash");
+const lodash_merge_1 = __importDefault(require("lodash.merge"));
 const service_1 = require("./service");
 class Store {
     services = [];
@@ -42,7 +42,7 @@ class Store {
             declineAll: mobx_1.action,
             toggleType: mobx_1.action,
         });
-        this._options = (0, lodash_1.merge)({
+        this._options = (0, lodash_merge_1.default)({
             customizable: false,
             cookie: {
                 name: '_cc',

@@ -1,6 +1,6 @@
 import { makeObservable, action, observable, computed } from 'mobx'
 import Cookies, { CookieSetOptions } from 'universal-cookie'
-import { merge } from 'lodash'
+import merge from 'lodash.merge'
 import { ServiceInformations, ServiceOptions, Service, ConsentResponse } from './service'
 import { Denormalizable, Normalizable } from '@code-202/serializer'
 
@@ -88,7 +88,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         this._cookies = new Cookies(cookies)
     }
 
-    public initialize (): void {
+    public initialize(): void {
         this.loadTokenFromCookie()
 
         this.dialogIsOpened = !this.isClosable
@@ -96,8 +96,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         this.newServiceSinceLastConsent = this.noCookie === false && this.nbNeedConcentServices > 0
     }
 
-    public get isClosable(): boolean
-    {
+    public get isClosable(): boolean {
         return this.noCookie !== true && this.nbNeedConcentServices == 0
     }
 
@@ -121,7 +120,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         return true
     }
 
-    public toggleDialog (): void {
+    public toggleDialog(): void {
 
         this.dialogIsOpened = !this.dialogIsOpened
 
@@ -130,7 +129,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         }
     }
 
-    public toggleCustomize (): void {
+    public toggleCustomize(): void {
         this.globalConsent = 'unknown'
         this.customizing = !this.customizing
     }
@@ -144,18 +143,18 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         }
     }
 
-    public get types (): TypeOptions[] {
+    public get types(): TypeOptions[] {
         const types: Record<string, TypeOptions> = {}
 
         for (const service of this.services) {
-            const key = service.type+''
+            const key = service.type + ''
             if (types[key] === undefined) {
                 types[key] = {
                     id: key,
                     needConsent: service.needConsent,
                     choice: service.consent,
                     expanded: this.typesExpanded.indexOf(key) >= 0,
-                    services: [ service ]
+                    services: [service]
                 }
             } else {
                 if (types[key].choice != service.consent) {
@@ -171,7 +170,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         return Object.values(types)
     }
 
-    public addService (options: ServiceOptions): boolean {
+    public addService(options: ServiceOptions): boolean {
         const already = this.findService(options.id)
 
         if (already) {
@@ -261,7 +260,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         this.dialogIsOpened = false
     }
 
-    public get consents (): string[] {
+    public get consents(): string[] {
         const consents: string[] = []
 
         for (const service of this.services) {
@@ -273,7 +272,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         return consents
     }
 
-    public get unconsents (): string[] {
+    public get unconsents(): string[] {
         const unconsents: string[] = []
 
         for (const service of this.services) {
@@ -285,7 +284,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         return unconsents
     }
 
-    protected loadTokenFromCookie (): void {
+    protected loadTokenFromCookie(): void {
         const cookie = this._cookies.get(this._options.cookie.name)
 
         if (cookie === undefined) {
@@ -313,11 +312,11 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         }
     }
 
-    public get nbNeedConcentServices (): number {
+    public get nbNeedConcentServices(): number {
         return (this.services.filter((s: Service) => s.needConsent && s.consent == 'unknown')).length
     }
 
-    protected findService (id: string): Service | undefined {
+    protected findService(id: string): Service | undefined {
         for (const service of this.services) {
             if (service.id === id) {
                 return service
@@ -325,7 +324,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         }
     }
 
-    protected saveConsentsInCookie (): void {
+    protected saveConsentsInCookie(): void {
         const options: CookieSetOptions = {
             path: this._options.cookie.path,
             domain: this._options.cookie.domain,
@@ -333,7 +332,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
             secure: this._options.cookie.secure,
         }
 
-        this._cookies.set(this._options.cookie.name, this.consents.join('|')+'!'+this.unconsents.join('|'), options)
+        this._cookies.set(this._options.cookie.name, this.consents.join('|') + '!' + this.unconsents.join('|'), options)
 
         action(() => {
             this.noCookie = false
@@ -341,7 +340,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         })()
     }
 
-    normalize (): StoreNormalized {
+    normalize(): StoreNormalized {
         const data = {
             noCookie: this.noCookie,
             dialogIsOpened: this.dialogIsOpened,
@@ -350,7 +349,7 @@ export class Store implements Normalizable<StoreNormalized>, Denormalizable<Stor
         return data
     }
 
-    denormalize (data: StoreNormalized) {
+    denormalize(data: StoreNormalized) {
         action(() => {
             this.noCookie = data.noCookie
             this.dialogIsOpened = data.dialogIsOpened
